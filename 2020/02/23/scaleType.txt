@@ -1,0 +1,23 @@
+1. android:scaleType="center"
+保持原图的大小，显示在中心。原图的大小>ImageView的大小时，截取中间部分。
+
+2. android:scaleType="center_inside"
+等比例缩小，直到原图的大小<=ImageView的大小,居中显示
+
+3. android:scaleType="center_crop"
+等比例放大，直到原图的大小>=ImageView的大小,居中显示
+
+4. android:scaleType="matrix"
+保持原图大小，从左上角开始显示，超出部分不显示
+
+5. android:scaleType="fit_xy"
+填满ImageView，拉伸显示图片，不保持原比例
+
+6. android:scaleType="fit_start"
+等比例放大或缩小，直到长或宽有一个填满、另一个足够显示，显示在ImageView的start(前部／上部)
+
+7. android:scaleType="fit_center"
+等比例放大或缩小，直到长或宽有一个填满、另一个足够显示，显示在ImageView的center(中间)
+
+8. android:scaleType="fit_end"
+等比例放大或缩小，直到长或宽有一个填满、另一个足够显示，显示在ImageView的end(后部／下部)
