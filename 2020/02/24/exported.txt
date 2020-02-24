@@ -1,0 +1,5 @@
+android:exported
+
+如果Component带有<intent-filter>默认值为true；不带<intent-filter>，默认值为true。
+当android:exported为true时，可供外部其他应用程序使用。
+当android:exported为false时，只可供当前应用程序以及相同用户id的应用程序使用。
