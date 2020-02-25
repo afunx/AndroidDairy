@@ -1,0 +1,24 @@
+文字基线
+
+top line             -----------------------
+                            leading
+recommended top line -----------------------
+
+                            ascent
+
+base line            -----------------------
+                            descent
+bottom line          -----------------------
+
+
+
+中线center line为recommended top line和bottom line的中心线。
+
+令center line到base line的长度为x，base line的y坐标为0，y的正方向为top line指向bottom line
+center line到bottom line的长度为(descent+ascent)/2=x+descent
+所以,x=(descent+ascent)/2-descent即为所求
+
+若center line的y坐标为y0，求base line的y坐标
+y=y0+x=y0+x=y0+(descent+ascent)/2-descent=y0+(ascent-descent)/2
+
+
