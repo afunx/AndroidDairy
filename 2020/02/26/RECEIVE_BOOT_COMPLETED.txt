@@ -1,0 +1,3 @@
+RECEIVE_BOOT_COMPLETED是android开机广播的Action。
+如果是系统应用，即AndroidManifest.xml中，android:sharedUserId="android.uid.system"，可以接收到开机广播。
+如果不是系统应用，则需要<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />才可以收到系统广播。

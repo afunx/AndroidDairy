@@ -35,6 +35,7 @@ P
 Q
 
 R
+RECEIVE_BOOT_COMPLETED:  2020/02/26
 
 S
 scaleType:  2020/02/23
