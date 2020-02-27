@@ -1,0 +1,12 @@
+Paint.Cap
+笔帽，也就是Paint画线时线的两头
+
+BUTT:    没有笔帽
+ROUND:   圆形笔帽
+SQUARE:  方形笔帽
+
+Paint:
+
+  public Cap getStrokeCap();
+
+  public void setStrokeCap(Cap cap);
