@@ -1,0 +1,12 @@
+Paint.Join
+线的连接点
+
+BEVEL:		直线
+ROUND:		圆角
+MITER:		锐角
+
+Paint:
+
+	public Join getStrokeJoin();
+
+	public void setStrokeJoin(Join join)
