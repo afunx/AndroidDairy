@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="rectangle|line|oval|ring">
+	<!--shape默认为rectangle。以下属性直邮在android:shape="ring“时可用:
+		innerRadius 尺寸，内环的半径
+		innerRadiusRadio 浮点型，以环的宽度比率来表示内环的半径，默认是3，表示内径是整个圆环宽度1/3
+		thickness 尺寸，环的厚度
+		thicknessRatio 浮点型，以环的宽度比率来表示环的厚度，默认是9，表示厚度是整个圆环宽度1/9
+		useLevel true和false，如果要使用LevelListDrawable对象，就要设置为true-->
+
+	<!--圆角，radius优先级最低，表示四个角的半径 -->
+	<corners
+		android:radius="10dp"
+		android:topLeftRadius="8dp"
+		android:topRightRadius="8dp"
+		android:bottomLeftRadius="6dp"
+		android:bottomRightRadius="6dp"/>
+
+	<!--控件大小，高和宽-->
+	<size
+		android:width="100dp"
+		android:height="40dp"/>
+
+	<!--间隔-->
+	<padding
+		android:right="4dp"
+		android:bottom="4dp"
+		android:top="4dp"
+		android:left="4dp" />
+
+	<!--渐变: angle=0，渐变色从左到右，然后逆时针方向转
+			  angle=90，从下往上，
+			  angle必须为45的整数倍，仅在type="linear"有效
+			  linear 线性渐变，以开始色为中心
+			  radial 放射性渐变，以开始色为中心
+			  sweep 扫描线渐变
+			  centerX 渐变中心x点坐标的相对位置
+			  centerY 渐变中心y点坐标点相对位置
+		      gradientRadius 渐变色半径，当type=radial时才能使用-->
+	<gradient
+		android:angle="#ff0088ff"
+		android:centerColor="#ff0088ff"
+		android:centerX="100dp"
+		android:centerY="80dp"
+		android:StartColor="#ff0088ff"
+		android:endColor="#ff0088ff"
+		android:gradientRadius="30dp"
+		android:type="linear|radial|sweep"
+		android:userLeve="true|false"/>
+
+	<!--填充的颜色-->
+	<solid
+		android:color="#FF00FF88"/>
+
+	<!--描边:设置控件的边框
+			 width设置边框的宽度
+			 color设置边框的颜色
+			 dashGap设置虚线的间隔宽度
+			 dashWidth设置虚线的宽度
+			 只要dashGap和dashWidth有一个为0，就是实线-->
+	<stroke
+		android:color="#ff0088ff"
+		android:width="1dp"
+		android:dashGap="2dp"
+		android:dashWidth="5dp"/>
+</shape>
