@@ -1,0 +1,9 @@
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+浮动窗口通知权限，可以让Dialog使用Application的Context达到全局显示的目的。
+
+if (Build.VERSION.SDK_INT>=26) {
+	dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY);
+} else {
+	dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+}
