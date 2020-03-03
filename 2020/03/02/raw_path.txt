@@ -1,0 +1,9 @@
+raw_path
+
+String = "android.resource://" + getApplication().getPackageName() + "/" + R.raw.xxx;
+
+注意:android.resource而不是android:resource
+
+android studio创建方法(版本3.5.2):
+
+New -> Folder -> Raw Resources Folder
