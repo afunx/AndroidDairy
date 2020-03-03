@@ -1,0 +1,14 @@
+VideoView
+
+单独某个mp4循环播放实现
+
+VideoView videoView = findViewById(R.id.xxx);
+String path = ...;
+videoView.setVideoPath(path);
+videoView.start();
+videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+	@Override
+	public void onPrepared(MediaPlayer mediaPlayer) {
+		mediaPlayer.setLooping(true);
+	}
+});
