@@ -1,0 +1,8 @@
+setWillNotDraw(boolean willNotDraw)是View里的方法:
+
+public void setWillNotDraw(boolean willNotDraw);
+
+该方法用来设置onDraw是否会被执行。
+View默认是会调用onDraw()，而ViewGroup默认不会调用。因为ViewGroup在构造函数中会掉用initViewGroup()方法，在该方法内，通过setFlags(WILL_NOT_DRAW, DRAW_MASK)，设置ViewGroup不会绘制。
+
+如果需要绘制ViewGroup，可以在构造函数中设置setWillNotDraw(false)就可以让该ViewGroup会被绘制，即onDraw()会被调用。
