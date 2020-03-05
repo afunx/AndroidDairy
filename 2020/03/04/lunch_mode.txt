@@ -1,0 +1,23 @@
+android Activity有4种lunch mode:
+
+<activity
+	android:name=".MainActivity"
+	android:launchMode="standard|singleTop|singleTask|singleInstance"
+	>
+</activity>
+
+1. standard
+默认的lunchMode，每次启动都会在当前栈创建一个新的Activity实例。
+
+2. singleTop
+如果该Activity在栈顶，则直接不会创建新的Activity，回调onNewIntent()。
+
+3. singleTask
+如果该Activity在栈顶，则和singleTop一样；如果该Activity不在栈顶，则先pop它上面的Activity后，再回调onNewIntent()；该Activity不存在时，则创建新的Activity。
+除此之外，taskAffinity可以配置该Activity的栈，默认为package name。当它不存在，且与启动它的Activity不在同一栈时，会创建栈并将它放在栈内。
+
+4. singleInstance
+全局唯一Activity，单独占用一个栈。
+
+查看Activity指令
+adb shell dumpsys activity activities
