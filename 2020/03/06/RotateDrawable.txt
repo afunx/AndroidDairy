@@ -1,0 +1,48 @@
+
+public class RotateDrawable extends DrawableWrapper
+
+public abstract DrawableWrapper extends Drawable
+
+public abstract Drawable
+
+使用方法:
+
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmls:android="http://schemas.android.com/apk/res/android"
+	android:drawable="@drawable/img"
+	android:fromDegrees="0"
+	android:pivotX="50%"
+	android:pivotY="50%"
+	android:toDegrees="360"
+	android:visible="true|false" />
+
+<rotate>
+	必须作为根元素
+
+android:drawable
+	Drawable资源。必须的。引用一个drawable资源。
+
+android:visible
+	boolean。是否可见
+
+android:fromDegrees
+	int。起始角度。
+
+android:toDegrees
+	int。结束角度。
+
+android:pivotX
+	%。旋转的中心图片Y轴的百分比。
+
+android:pivotY
+	%。旋转的中心图片X轴的百分比。
+
+android:visible
+	boolean。是否可见。
+
+
+Drawable有个方法为:
+public abstract draw(@NonNull Canvas canvas);
+
+该方法会在View的onDraw(@NonNull Canvas canvas)被执行。
+每个View可以设置Drawable，而此Drawable可以在onDraw时候被调用Drawalbe的draw方法。
