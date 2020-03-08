@@ -1,0 +1,47 @@
+
+//Interpolator是动画插值器的接口，它可以让基本动画（alpha，scale，translate，rotate）加速、减速、重复等。
+public interface Interpolator extends TimeInterpolator {
+}
+
+//TimeInterpolator是新引入的动画插值接口。与Interpolator功能一样。
+public interface TimeInterpolator {
+	float getInterpolation(float input):
+}
+
+//BaseInterpolator是动画插值器的基类
+abstract public class BaseInterpolator implements Interpolator
+
+//AccelerateInterpolator 加速
+public class AccelerateInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//AccelerateDecelerateInterpolator 先加速后减速
+public class AccelerateDecelerateInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//AnticipateInterpolator 先回退一小步，然后加速
+public class AnticipateInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//AnticipateOvershootInterpolator 先回退一小步，然后加速，超出终点一小步，最后回到终点
+public class AnticipateOvershootInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//BoundeInterpolator 弹性效果
+public class BounceInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//CycleInterpolator 周期运动
+public class CycleInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//DecelerateInterpolator 减速
+public class DecelerateInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//LinearInterpolator 线性
+public class LinearInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//OvershootInterpolator 快速到达终点并超出一小步，最后回到终点
+public class OvershootInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+//PathInterpolator
+public class PathInterpolator extends BaseInterpolator implements NativeInterpolatorFactory
+
+
+使用方法:
+1. Animation的setInterpolator(Interpolator i)和setInterpolator(Context context, int resID)
+2. android:interpolator="@android:anim/accelerate_interpolator"
