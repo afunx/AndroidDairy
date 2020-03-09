@@ -1,0 +1,21 @@
+在Module的build.gradle加入Task:
+
+task makeAar(type: Copy) {
+	// 删除以前的
+	delete 'libs/xxx.aar'
+	// 设置拷贝路径
+	from('build/outputs/aar/')
+	// 新生成的aar目录
+	into('libs/')
+}
+makeAar.dependsOn(build)
+
+然后在Terminal输入:
+gradlew makeAar
+
+
+使用xxx.aar的项目的build.gradle，在dependencies下加入:
+
+dependencies {
+	implementation (name: 'xxx', ext: 'aar')
+}
