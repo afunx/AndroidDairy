@@ -16,3 +16,8 @@ onDestroy()
 
 停止Service:
 stopService() -> onDestroy()
+
+Intent类中，有一个setPackage(@Nullable String packageName)方法。
+android源码注释中表示，如果为null，则全部应用都能收到Intent，如果非null，只有指定应用可以收到。
+但是，android>=5.0时，android系统禁止使用不含packageName的隐式调用Intent。
+除了使用setPackage之外，还可以使用setComponent(@Nullable ComponentName component)来解决这个问题。
