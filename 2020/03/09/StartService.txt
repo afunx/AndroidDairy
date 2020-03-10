@@ -1,0 +1,18 @@
+
+onCreate() -> onStartCommand() -> ... -> onDestroy()
+
+onCreate()
+首次创建服务时，系统将调用此方法。只会调用一次。
+
+onStartCommand()
+startService()请求服务启动时，会调用此方法，会多次调用。
+
+onDestroy()
+当服务被销毁时，会调用此方法。只会调用一次。
+
+启动Service:
+单次: startService() -> onCreate() -> onStartCommand()
+多次: startService() -> onCreate() -> onStartCommand() -> onStartCommand()
+
+停止Service:
+stopService() -> onDestroy()
