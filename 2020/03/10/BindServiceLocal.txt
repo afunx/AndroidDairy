@@ -1,0 +1,74 @@
+
+onCreate() -> onBind() -> ... -> onUnbind() -> onDestroy()
+
+onCreate() -> onStartCommand() -> onBind() -> ... -> onUnbind() -> onRebind() -> ... -> onUnbind() -> onDestroy()
+
+onCreate()
+首次创建服务时，系统将调用此方法。只会调用一次。
+
+onBind()
+bindService()请求服务绑定时，会调用此方法。只会调用一次。
+
+onUnbind()
+unbindService()请求服务解绑时，会调用此方法。非onRebind()时，只会调用一次。
+
+onRebind()
+当旧的组件与服务解绑后，另一个新组件与服务绑定，onUnbind()返回true时，并且该Service同时被调用过startService()。会多次调用。
+
+onDestroy()
+当服务被销毁时，会调用此方法。只会调用一次。
+
+onRebind(Intent intent)何时会被调用?
+条件:
+1. 除了调用bindService()外，还需要调用startService()
+2. Service重写boolean onUnbind(Intent intent)，需要返回true
+结果:
+a. 第一次unbindService()后，并不会回调onDestroy()
+b. 再次bingService()时，onRebind(Intent intent)会被调用
+
+注意:必须同时满足条件1和条件2，才会产生结果a和b。如果不满足任一条件，a和b都不会发生。
+
+
+简易例子:
+
+public class TestBindService extends Service {
+
+	private IBinder mBinder = new LocalBinder();
+
+	@Override
+	public IBinder onBind(Intent intent) {
+		return mBinder;
+	}
+
+	public class LocalBinder extends Binder {
+		public TestBindService getService() {
+			return TestBindService.this;
+		}
+	}
+}
+
+public class MainActivity extends AppCompatActivity {
+
+	private TestBindService testBindService;
+
+	private ServiceConnection mServiceConnection = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			testBindService = ((TestBindService)service).getService);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			testBindService = null;
+		}
+	}
+
+	private bindTestBindService() {
+		Intent intent = new Intent(this, TestBindService.class);
+		bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+	}
+
+	private unbindTestBindService() {
+		unbindService(mServiceConnection);
+	}
+}
