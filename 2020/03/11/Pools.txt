@@ -1,0 +1,40 @@
+
+对象池使用:
+
+public class XxxPool {
+
+	private static final String TAG = "XxxPool";
+
+	private static final int MAX_POOL_SIZE = 256;
+
+	private Pools.SynchronizedPool<Xxx> pool;
+
+	private XxxPool() {
+		pool = new Pools.SynchronizedPool<>(MAX_POOL_SIZE);
+	}
+
+	private static class Singleton {
+		private static XxxPool instacne = new XxxPool();
+	}
+
+	public static XxxPool get() {
+		return Singleton.instance;
+	}
+
+	public Xxx acquire() {
+		try {
+			Xxx xxx = pool.acquire();
+			return xxx == null ? new Xxx() : xxx;
+		} catch (Exception e) {
+			return new Xxx();
+		}
+	}
+
+	public void release(Xxx xxx) {
+		try {
+			pool.release(xxx);
+		} catch (Exception e) {
+		}
+	}
+
+}
