@@ -1,0 +1,74 @@
+aidl支持数据类型:
+1. Java的八种基本类型,包括byte、short、int、long、float、double、boolean、char。
+2. String和CharSequence
+3. Parcelable
+4. List: List中的全部元素必须是aidl支持的类型
+5. Map: Map中的全部元素必须是aidl支持的类型
+
+定向tag:
+in: 数据只能由客户端流向服务端
+out: 数据只能由服务端流向客户端
+inout: 数据支持客户端和服务端互相流动
+
+自定义Parcelable使用:
+1. Java Bean类Xxx实现Parcelable 
+public class Xxx implements Parcelable
+
+其他的代码android studio都可自动生成了
+
+2. Xxx.java相同路径下创建一个Xxx.aidl文件:
+
+package aaa.bbb.ccc;
+
+// 注意parcelable全是小写
+parcelable Xxx;
+
+3. XxxManager.aidl:
+
+package aaa.bbb.ccc;
+// 导入需要使用的自定义Parcelable
+import aaa.bbb.ccc.Xxx;
+
+interface XxxManager {
+	void yyy(in Xxx x);
+}
+
+4. 服务端代码
+
+public class AidlService extends Service {
+	private final Xxx.Stub mXxxManager = new Xxx.Stub() {
+		@Override
+		public void yyy(Xxx x) {
+		}	
+	}
+
+	@Nullable
+	@Override
+	public IBinder onBind(Intent intent) {
+		return mXxxManager;
+	}
+}
+
+
+5. 客户端代码
+
+public class ClientActivity extends AppCompatActivity {
+
+	private mXxxManager;	
+
+	private ServiceConnection mServiceConnection = new ServiceConnection() {
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			mXxxManager = XxxManager.Stub.asInterface(service);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+		}
+	}
+
+	private void bindService() {
+		Intent intent = new Intent(this, AidlService.class);
+		bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
+	}
+}
