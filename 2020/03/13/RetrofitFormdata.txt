@@ -1,0 +1,102 @@
+
+UploadXxxService.java:
+
+public interface UploadXxxService {
+	@Multipart
+	@POST("/aaa/bbb/ccc")
+	Call<ResponseBody> postXxxBytes(@Part MultipartBody requestBody);
+}
+
+UploadXxxRespository.java:
+
+public class UploadXxxRespository {
+	public static Response<ResponseBody> uploadXxxBytes(byte[] bytes) {
+		RequestBody body = MultipartBody.create(MultipartBody.FORM, bytes);
+		MultipartBody.Part part = MultipartBody.Part.createFormData("file", "filename", body);
+		Response<ResponseBody> responseBody = null;
+		try {
+			responseBody = ApiClient.get().getService(UploadXxxService.class).postXxxBytes(part).execute():
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return responseBody;
+}
+
+public class ApiClient {
+	private static final String TAG = "ApiClient";
+	private static final String BASE_URL = "http://192.168.100.100:8000";
+	private static final long READ_TIMEOUT = 10;
+	private static final long CONNECT_TIMEOUT = 10;
+	private static final boolean DEBUG = true;
+
+	private Retrofit mRetrofit;
+
+	private ApiClient() {
+	}
+
+	private static class Singleton {
+		private static ApiClient instance = new ApiClient();
+	}
+
+	public static ApiClient get() {
+		return Singleton.instance;
+	}
+
+	private initApiClient() {
+		if (mRetrofit != null) {
+			return;
+		}
+		RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+			@Override
+			public void accept(Throwable throwable) throws Exception {
+				Log.e(TAG, "accept() throwable: " + throwable);
+			}
+		});
+		OkHttpClient.Builder builder = new OkHttpClient.Builder();
+		builder.readTimeout(READ_TIMEOUT, TimeUnit.SECONDS);
+		builder.connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS);
+		builder.hostnameVerifier(new HostnameVerifier() {
+			@Override
+			public boolean verify(String hostname, SSLSession session) {
+				return true;
+			}
+		});
+		if (DEBUG) {
+			HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+				@Override
+				public void log(String message) {
+					Log.i(TAG, message);
+				}
+			});
+			loggintInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+			builder.addInterceptor(loggingInterceptor);
+		}
+		OkHttpClient okHttpClient = builder.build();
+		mRetrofit = new Retrofit.Builder()
+				.baseUrl(BASE_URL)
+				.addConverterFactory(GsonConverterFactory.create())
+				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+				.client(okHttpClient)
+				.build();
+	}
+
+	public synchronized <T> T getService(Class<T> clazz) {
+		if (mRetrofit == null) {
+			initApiClient();
+		}
+		return mRetrofit.create(clazz);
+	}
+
+}
+
+
+build.gradle:
+
+dependencies {
+	implementation 'io.reactivex.rxjava2.rxandroid.2.1.1'
+	implementation 'com.squareup.okhttp3.okhttp:3.10.0'
+	implementation 'com.squareup.okhttp3.logging-interceptor:3.9.1'
+	implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+	implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+	implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+}
