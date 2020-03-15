@@ -1,0 +1,99 @@
+FLAG_ACTIVITY_FORWARD_RESULT是Intent.java中的静态常量
+
+/**
+ * If set and this intent is being used to launch a new activity from an
+ * existing one, then the reply target of the existing activity will be
+ * transfered to the new activity.  This way the new activity can call
+ * {@link android.app.Activity#setResult} and have that result sent back to
+ * the reply target of the original activity.
+ */
+public static final int FLAG_ACTIVITY_FORWARD_RESULT = 0x02000000;
+
+简单来说，FLAG_ACTIVITY_FORWARD_RESULT就是startActivityForResult时中转，如下所述:
+
+AActivity -> BActivity -> CActivity
+
+AActivity -> BActivity 使用startActivityForResult()
+
+BActivity -> CActivity 使用startActivity()，同时finish()自己
+
+CActivity 使用setResult()以及finish()自己
+
+如果BActivity跳转到CActivity时，加入了FLAG_ACTIVITY_FORWARD_RESULT，AActivity的onActivityResult()将被调用，并且可以得到CActivity的setResult()的结果。
+
+
+示例代码:
+
+public class AActivity extends AppCompatActivity {
+
+    private static final String TAG = "AActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_a);
+        gotoActivityB();
+    }
+
+    private void gotoActivityB() {
+        Intent intent = new Intent(this, BActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            Log.i(TAG, "onActivityResult() requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + data.getStringExtra("data"));
+        } else {
+            Log.i(TAG, "onActivityResult() requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + null);
+        }
+    }
+}
+
+public class BActivity extends AppCompatActivity {
+
+    private static final String TAG = "BActivity";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_b);
+        gotoActivityC();
+    }
+
+    private void gotoActivityC() {
+        Intent intent = new Intent(this, CActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            Log.i(TAG, "onActivityResult() requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + data.getStringExtra("data"));
+        } else {
+            Log.i(TAG, "onActivityResult() requestCode: " + requestCode + ", resultCode: " + resultCode + ", data: " + null);
+        }
+    }
+}
+
+public class CActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_c);
+
+        setCActivityResult();
+    }
+
+    private void setCActivityResult() {
+        Intent data = new Intent();
+        data.putExtra("data", "afunx");
+        setResult(Activity.RESULT_OK, data);
+        finish();
+    }
+}
