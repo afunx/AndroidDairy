@@ -1,0 +1,26 @@
+FLAG_ACTIVITY_NO_HISTORY是Intent.java中的静态常量
+
+/**
+ * If set, the new activity is not kept in the history statck.  As soon as
+ * the user navigates away from it, the activity is finished.  This may also
+ * be set with the {@link android.R.styleable#AndroidManifestActivity_noHistory
+ * noHistory} attribute.
+ *
+ * <p>If set, {@link android.app.Activity#onActivityResult onActivityResult()}
+ * is never invoked when the current activity starts a new activity which
+ * sets a result and finishes.
+ */
+public static final int FLAG_ACTIVITY_NO_HISTORY = 0x40000000
+
+简单来说，FLAG_ACTIVITY_NO_HISTORY设置之后，新启动的Activity，不会存在历史栈中，并且会在跳转时finish，如下所述:
+
+AActivity -> BActivity -> CActivity
+
+AActivity -> BActivity 使用FLAG_ACTIVITY_NO_HISTORY。
+BActivity跳转到CActivity时，就会调用finish()。声明周期为CActivity::onCreate()在BActivity::onDestroy()之前。
+
+private void gotoBActivity() {
+	Intent intent = new Intent(this, BActivity.class);
+	intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+	startActivity(intent);
+}
