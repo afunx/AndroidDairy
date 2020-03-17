@@ -32,7 +32,7 @@ public class ListViewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.lv_item, null);
+            convertView = mInflater.inflate(R.layout.lv_item, parent, false);
             holder = new ViewHolder();
             holder.textView = convertView.findViewById(R.id.tv_item);
             convertView.setTag(holder);
