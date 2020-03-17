@@ -1,0 +1,134 @@
+1. 加入库
+
+1.1 File -> Project Structure...
+1.2 Dependencies
+1.3 Modules中选择需要使用的module
+1.4 + -> Library dependency
+1.5 输入RecyclerView -> 点击Search(搜索图片)
+1.6 选择com.android.support:recyclerview-v7
+
+
+2. 添加布局文件
+
+rv_item.xml:
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        android:id="@+id/tv_rv_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textSize="16sp" />
+
+</RelativeLayout>
+
+
+activity_main.xml:
+
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
+
+
+3. 创建RecyclerView的Adapter
+
+RecyclerViewAdapter.java:
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+
+    private final LayoutInflater mLayoutInflater;
+
+    public RecyclerViewAdapter(@NonNull Context context) {
+        mLayoutInflater = LayoutInflater.from(context);
+
+    }
+
+    private List<String> mNameList = new ArrayList<>();
+
+    public void addName(String name) {
+        mNameList.add(name);
+        notifyDataSetChanged();
+    }
+
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(mLayoutInflater.inflate(R.layout.rv_item, parent, false));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.textView.setText(mNameList.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return mNameList.size();
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        private TextView textView;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textView = itemView.findViewById(R.id.tv_rv_item);
+        }
+    }
+}
+
+
+4. 使用代码
+
+MainActivity.java:
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+
+public class MainActivity extends AppCompatActivity {
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        RecyclerView recyclerView = findViewById(R.id.rv);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerViewAdapter = new RecyclerViewAdapter(this);
+        recyclerView.setAdapter(mRecyclerViewAdapter);
+
+		// 测试数据
+        for (int i = 0; i < 20; i++) {
+            mRecyclerViewAdapter.addName("item " + i);
+        }
+	}
+}
