@@ -1,0 +1,25 @@
+关键代码:
+
+public interface XxxListener {
+	onXxxClick(Xxx x);
+}
+
+@NonNull
+@Override
+public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
+	final ViewHolder viewHoler = new ViewHolder(mLayoutInflater.inflate(R.layout.xxx, parent, false);
+	viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			if (mXxxListener != null) {
+				int position = viewHolder.getAdapterPosition();
+				mXxxListener.onXxxClick(mXxxList.get(position));
+			}
+		}
+	});
+	return viewHolder;
+}
+
+注意事项:
+1. 在onCreateViewHolder实现，只会创建一次
+2. viewHolder.getAdapterPosition()会返回列表中的位置，而不是UI位置。
