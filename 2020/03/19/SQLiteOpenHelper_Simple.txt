@@ -1,0 +1,104 @@
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
+
+public class WifiDBHelper extends SQLiteOpenHelper {
+
+    private static final String TAG = "WifiDBHelper";
+
+    private static final String DB_NAME = "wifi_database.db";
+
+    private static final String TABLE_NAME = "t_ssid";
+
+    private static final int DB_VERSION = 1;
+
+    private static final String COLUMN_SSID = "ssid";
+
+    private static final String COLUMN_PASSWD = "passwd";
+
+    private SQLiteDatabase mSQLiteDatabase;
+
+    public WifiDBHelper(@Nullable Context context) {
+        super(context, DB_NAME, null, DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String sql = "CREATE TABLE " + TABLE_NAME +
+                "( " + COLUMN_SSID + " CHAR(32) PRIMARY KEY NOT NULL," +
+                COLUMN_PASSWD + " CHAR(64) NOT NULL" + ")";
+        Log.i(TAG, "onCreate() sql: " + sql);
+        db.execSQL(sql);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+    public void open() {
+        Log.i(TAG, "open()");
+        if (mSQLiteDatabase == null) {
+            mSQLiteDatabase = getWritableDatabase();
+        }
+        mSQLiteDatabase.reopenReadWrite();
+    }
+
+    public void close() {
+        Log.i(TAG, "close()");
+        super.close();
+    }
+
+    public String query(String ssid) {
+        Cursor cursor = mSQLiteDatabase.query(TABLE_NAME, new String[]{COLUMN_PASSWD}, COLUMN_SSID + "=?", new String[]{ssid}, null, null, null);
+        String passwd = null;
+        if (cursor.moveToNext()) {
+            passwd = cursor.getString(cursor.getColumnIndex(COLUMN_PASSWD));
+        }
+        cursor.close();
+        Log.i(TAG, "query() ssid: " + ssid + ", passwd: " + passwd);
+        return passwd;
+    }
+
+    public void insertOrUpdate(String ssid, String passwd) {
+        Log.d(TAG, "insertOrUpdate() ssid: " + ssid + ", passwd: " + passwd);
+        if (query(ssid) != null) {
+            update(ssid, passwd);
+        } else {
+            insert(ssid, passwd);
+        }
+    }
+
+    private void insert(String ssid, String passwd) {
+        Log.d(TAG, "insert() ssid: " + ssid + ", passwd: " + passwd);
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SSID, ssid);
+        values.put(COLUMN_PASSWD, passwd);
+        mSQLiteDatabase.insert(TABLE_NAME, null, values);
+    }
+
+    private void update(String ssid, String passwd) {
+        Log.d(TAG, "update() ssid: " + ssid + ", passwd: " + passwd);
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SSID, ssid);
+        values.put(COLUMN_PASSWD, passwd);
+        mSQLiteDatabase.update(TABLE_NAME, values, COLUMN_SSID + "=?", new String[]{ssid});
+    }
+
+    public void delete(String ssid) {
+        Log.d(TAG, "delete() ssid: " + ssid);
+        mSQLiteDatabase.delete(TABLE_NAME, COLUMN_SSID + "=?", new String[]{ssid});
+    }
+
+    public static void dropTable(@NonNull Context context) {
+        Log.e(TAG, "dropTable()");
+        context.deleteDatabase(DB_NAME);
+    }
+}
+
