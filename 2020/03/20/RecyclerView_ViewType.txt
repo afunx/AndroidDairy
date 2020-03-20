@@ -1,0 +1,69 @@
+
+关键代码:
+
+public class XxxRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+	private static final int VIEW_TYPE_XXX = 0;
+
+	private static final int VIEW_TYPE_YYY = 1;
+
+	@Override
+	public int getItemViewType(int position) {
+		if (...) {
+			return VIEW_TYPE_XXX;
+		} else if(...) {
+			return VIEW_TYPE_YYY;
+		}
+	}
+
+	@NonNull
+	@Override
+	public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		final RecyclerView.ViewHolder viewHolder;
+		switch (viewType) {
+			case VIEW_TYPE_XXX:
+				viweHolder = onCreateXXXViewHolder(parent);
+				break;
+			case VIEW_TYPE_YYY:
+				viewHolder = onCreateYYYViewHolder(parent);
+				break;
+		}
+		return viewHolder;
+	}
+
+	@NonNull
+	private XXXViewHolder onCreateXXXViewHolder(@NonNull final ViewGroup parent) {
+		final XXXViewHolder viewHolder = new XXXViewHolder(mLayoutInflater.inflate(R.layout.xxx_layout, parent false);
+		return viewHolder;
+	}
+
+	@NonNull
+	private YYYViewHolder onCreateYYYViewHolder(@NonNull final ViewGroup parent) {
+		final YYYViewHolder viewHolder = new YYYViewHolder(mLayoutInflater.inflate(R.layout.xxx_layout, parent false);
+		return viewHolder;
+	}
+
+	@Override
+	public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+		switch (holder.getItemViewType()) {
+			case VIEW_TYPE_XXX:
+				onBindXXXViewHolder(holder, position);
+				break;
+			case VIEW_TYPE_YYY:
+				onBindYYYViewHolder(holder, position);
+				break;
+		}
+	}
+
+	private void onBindXXXViewHolder(@NonNull XXXViewHolder holder, int position) {
+	}
+
+	private void onBindYYYViewHolder(@NonNull YYYViewHolder holder, int position) {
+	}
+
+	private class XXXViewHolder extends RecyclerView.ViewHolder {
+	}
+
+	private class YYYViewHolder extends RecyclerView.ViewHolder {
+	}
+}

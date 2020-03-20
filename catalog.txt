@@ -52,6 +52,7 @@ RotateDrawable: 2020/03/06
 RetrofitFormdata.txt:  2020/03/13
 RecyclerView_LinearLayoutManager.txt  2020/03/17
 RecyclerView_Click.txt  2020/03/18
+RecyclerView_ViewType.txt  2020/03/20
 
 S
 scaleType:  2020/02/23
