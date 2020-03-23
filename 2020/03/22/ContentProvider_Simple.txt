@@ -1,0 +1,20 @@
+
+AndroidManifest.xml:
+
+<provider
+	android:name=".XxxContentProvider"
+	android:authorities="Yyy"
+	android:enable="true"
+	android:exported"true"/>
+
+XxxContentProvider.java:
+
+@Override
+public Crusor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+	...
+	return null;
+}
+
+Useage:
+
+Context.getContentResolver().query(Uri.parse("content://Yyy"), null, null, null, null);
