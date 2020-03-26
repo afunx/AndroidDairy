@@ -1,0 +1,40 @@
+FLAG_ACTIVITY_MULTIPLE_TASK是Intent.java中的静态常量
+
+/**
+ * This flag is used to create a new task and launch an activity into it.
+ * This flag is always paired with either {@link #FLAG_ACTIVITY_NEW_DOCUMENT}
+ * or {@link #FLAG_ACTIVITY_NEW_TASK}. In both cases these flags alone would
+ * search through existing tasks for ones matching this Intent. Only if no such
+ * task is found would a new task be created. When paired with
+ * FLAG_ACTIVITY_MULTIPLE_TASK both of these behaviors are modified to skip
+ * the search for a matching task and unconditionally start a new task.
+ *
+ * <strong>When used with {@link #FLAG_ACTIVITY_NEW_TASK} do not use this
+ * flag unless you are implementing your own
+ * top-level application launcher.</strong>  Used in conjunction with
+ * {@link #FLAG_ACTIVITY_NEW_TASK} to disable the
+ * behavior of bringing an existing task to the foreground.  When set,
+ * a new task is <em>always</em> started to host the Activity for the
+ * Intent, regardless of whether there is already an existing task running
+ * the same thing.
+ *
+ * <p><strong>Because the default system does not include graphical task management,
+ * you should not use this flag unless you provide some way for a user to
+ * return back to the tasks you have launched.</strong>
+ *
+ * See {@link #FLAG_ACTIVITY_NEW_DOCUMENT} for details of this flag's use for
+ * creating new document tasks.
+ *
+ * <p>This flag is ignored if one of {@link #FLAG_ACTIVITY_NEW_TASK} or
+ * {@link #FLAG_ACTIVITY_NEW_DOCUMENT} is not also set.
+ *
+ * <p>See
+ * <a href="{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html">Tasks and Back
+ * Stack</a> for more information about tasks.
+ *
+ * @see #FLAG_ACTIVITY_NEW_DOCUMENT
+ * @see #FLAG_ACTIVITY_NEW_TASK
+ */
+public static final int FLAG_ACTIVITY_MULTIPLE_TASK = 0x08000000;
+
+简单来说，FLAG_ACTIVITY_MULTIPLE_TASK必须和FLAG_ACTIVITY_NEW_TASK或FLAG_ACTIVITY_NEW_DOCUMENT同时使用，才会生效。它的作用就是不再查找某个Activity是否已经存在于某个task中，直接创建新的task并将Activity放在其中。
