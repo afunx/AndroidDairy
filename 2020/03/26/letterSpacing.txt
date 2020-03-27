@@ -1,0 +1,13 @@
+letterSpacing是TextView的一个属性，类型为float
+
+android:letterSpacing="float"
+
+usage: A text letter-space value in ems.
+
+letterSpacing表示字间距为多少个ems（字符）。如果UI上给的是sp，则letterSpacing = sp间距/sp字体.
+(其中，sp间距为UI标注的字体间隔sp，sp字体表示该字体本身的sp。）
+
+参考:
+https://developer.android.google.cn/reference/android/widget/TextView#setLetterSpacing(float)
+
+
