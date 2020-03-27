@@ -1,0 +1,12 @@
+textScaleX是TextView的一个属性，类型为float  (API 1)
+
+android:textScaleX="float"
+
+Sets the horizontal  scale factor for text. The default value is 1.0. Values greater than 1.0 stretch the text wider.
+Values less than 1.0 make the text narrower. By default this value is 1.0.
+
+
+textScaleX用来控制水平方向字体缩放，是字体本身，不是间距。默认为1.0。小于1.0字体,横向收缩;大于1.0,字体横向放大。
+
+参考:
+https://developer.android.google.cn/reference/android/widget/TextView#setTextScaleX(float)
