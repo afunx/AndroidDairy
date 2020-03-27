@@ -1,4 +1,4 @@
-android Activity有4种lunch mode:
+android Activity有4种launch mode:
 
 <activity
 	android:name=".MainActivity"
@@ -7,7 +7,7 @@ android Activity有4种lunch mode:
 </activity>
 
 1. standard
-默认的lunchMode，每次启动都会在当前栈创建一个新的Activity实例。
+默认的launchMode，每次启动都会在当前栈创建一个新的Activity实例。
 
 2. singleTop
 如果该Activity在栈顶，则直接不会创建新的Activity，回调onNewIntent()。

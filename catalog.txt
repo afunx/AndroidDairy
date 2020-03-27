@@ -33,7 +33,7 @@ J
 K
 
 L
-lunch_mode:  2020/03/04
+launch_mode:  2020/03/04
 ListView_ViewHolder:  2020/03/14
 
 M
