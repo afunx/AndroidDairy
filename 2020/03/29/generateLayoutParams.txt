@@ -1,0 +1,25 @@
+ViewGroup.java中有一个方法是generateLayoutParams:
+
+/**
+ * Returns a new set of layout parameters based on the supplied attributes set.
+ *
+ * @param attrs the attributes to build the layout parameters from
+ *
+ * @return an instance of {@link android.view.ViewGroup.LayoutParams} or one
+ *         of its descendants
+ */
+public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {
+	return new LayoutParams(getContext(), attrs);
+}
+
+在实现自定义ViewGroup时，如果未Override该方法，则有可能会遭遇类似异常:
+
+java.lang.ClassCastException: android.view.ViewGroup$LayoutParams cannot be cast to android.view.ViewGroup$MarginLayoutParams
+
+
+解决方法:
+
+@Override
+public ViewGroup.LayoutParams generateLayoutParams(AttributeSet attrs) {
+	return new ViewGroup.MarginLayoutParams(getContext(), attrs);
+}
