@@ -1,0 +1,43 @@
+MeasureSpec是View中的静态类。主要用来在实现自定义控件onMeasure()中使用。
+
+public class View implements Drawable.Callback, KeyEvent.Callback,
+		AccessiblityEventSource {
+
+	public static class MeasureSpec {
+		private static final MODE_SHIFT = 30;
+		private static final MODE_MASK = 0x3 << MODE_SHIFT;
+
+		// 未知大小
+		public static final int UNSPECIFIED = 0 << MODE_SHIFT;
+
+		// 精确大小
+		public static final int EXACTLY = 1 << MODE_SHIFT;
+
+		// 最大大小
+		public static final int AT_MOST = 2 << MODE_SHIFT;
+
+		// 根据大小和模式计算MeasureSpec值
+		public static int makeMeasureSpec(int size, int mode) {
+			if (sUseBrokenMakeMeasureSpec) {
+				return size + mode;
+			} else {
+				return (size & ~MODE_MASK) | (mode & MODE_MASK);
+			}
+		}
+
+		// 根据MeasureSpec值获取模式
+		public static int getMode(int measureSpec) {
+			return (measureSpec & MODE_MASK);
+		}
+
+		// 根据MeasureSpec值获取大小
+		public static getSize(int measureSpec) {
+			return (measureSpec & ~MODE_MASK);
+		}
+	}
+}
+
+android:layout_width="match_parent"时，match_parent会转换为父容器的大小和EXACTLY。
+android:layout_width="30dp"时，30dp会转换为像素大小和EXACTLY。
+android:layout_width="wrap_content"时，wrap_content会转换为父容器的大小和AT_MOST。
+当尚未测量(measure)或需要多次测量，当前还未确定时，会使用UNSPECIFIED。
