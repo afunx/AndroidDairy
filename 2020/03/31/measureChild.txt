@@ -1,0 +1,80 @@
+measureChild方法簇是ViewGroup.java中的方法，用来实现自定义ViewGroup控件时，测量子控件的。
+
+public abstract class ViewGroup extends View implements ViewParent, ViewManager {
+
+	/**
+	 * Ask all of the children of this view to measure themselves, taking into
+	 * account both the MeasureSpec requirements for this view and its padding.
+	 * We skip children that are in the GONE state. The heavy lifting is done in
+	 * getChildMeasureSpec.
+	 *
+	 * @param widthMeasureSpec The width requirements for this view
+	 * @param heightMeasureSpec The height requirements for this view
+	 */
+	protected void measureChildren(int widthMeasureSpec, int heightMeasureSpec) {
+		final int size = mChildrenCount;
+		final View[] children = mChildren;
+		for (int i = 0; i < size; ++i) {
+			final View child = children[i];
+			if ((child.mViewFlags & VISIBILITY_MAST) != GONE) {
+				measureChild(child, widthMeasureSpec, heightMeasureSpec);
+			}
+		}
+	}
+
+	/**
+	 * Ask one of the children of this view to measure itself, taking into
+	 * account both the MeasureSpec requirements for this view and its padding.
+	 * The heavy lifting is done in getChildMeasureSpec.
+	 *
+	 * @param child The child to measure
+	 * @param parentWidthMeasureSpec The width requirements for this view
+	 * @param parentHeightMeasureSpec The height requirements for this view
+	 */
+	protected void measureChild(View child, int parentWidthMeasureSpec,
+			int parentHeightMeasureSpec) {
+		final LayoutParams lp = child.getLayoutParams();
+
+		final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
+					mPaddingLeft + mPaddingRight, lp.width);
+		final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
+					mPaddingTop + mPaddingBottom, lp.height);
+
+		child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+	}
+
+	/**
+	 * Ask one of the children of this view to measure itself, taking into
+	 * account both the MeasureSpec requirements for this view and its padding
+	 * and margins. The child must have MarginLayoutParams. The heavy lifting is
+	 * done in getChildMeasureSpec.
+	 *
+	 * @param child The child to measure
+	 * @param parentWidthMeasureSpec The width requirements for this view
+	 * @param widthUsed Extra space that has been used up by the parent
+	 *		  horizontally (possibly by other children of the parent)
+	 * @param parentHeightMeasureSpec The height requirements for this view
+	 * @param heightUsed Extra space that has been used up by the parent
+	 *		  vertically (possibly by other children of the parent)
+	 */
+	protected void measureChildWithMargins(View child,
+			int parentWidthMeasureSpec, int widthUsed,
+			int parentHeightMeasureSpec, int heightUsed) {
+		final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
+
+		final int childWidthMeasureSpec = getChildMeasureSpec(parentWidthMeasureSpec,
+						mPaddingLeft + mPaddingRight + lp.leftMargin + lp.rightMargin
+							+ widthUsed, lp.width);
+		final int childHeightMeasureSpec = getChildMeasureSpec(parentHeightMeasureSpec,
+						mPaddingTop + mPaddingBottom + lp.topMargin + lp.bottomMargin
+							+ heightUsed, lp.height);
+
+		child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
+	}
+}
+
+measureChildren用来测量ViewGroup的全部children。
+
+measureChild用来测量ViewGroup的某个child。
+
+measureChildWithMargins用来测量ViewGroup的某个child，并且child的LayoutParams必须是MarginLayoutParams及其子类
