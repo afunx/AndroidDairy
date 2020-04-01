@@ -1,0 +1,94 @@
+getChildMeasureSpec是ViewGroup中的静态方法
+
+public abstract class ViewGroup extends View implements ViewParent, ViewManager {
+
+	/**
+	 * Does the hard part of measureChildren: figuring out the MeasureSpec to
+	 * pass to a particular child. This method figures out the right MeasureSpec
+	 * for one dimension (height or width) of one child view.
+	 *
+	 * The goal is to combine information from our MeasureSpec with the
+	 * LayoutParams of the child to get the best possible results. For example,
+	 * if the this view knows its size (because its MeasureSpec has a mode of
+	 * EXACTLY), and the child has indicated in its LayoutParams that it wants
+	 * to be the same size as the parent, the parent should ask the child to
+	 * layout given an exact size.
+	 *
+	 * @param spec The requirements for this view
+	 * @param padding The padding of this view for the current dimension and
+	 *		  margins, if applicable
+	 * @param childDimension How big the child wants to be in the current
+	 *		  dimension
+	 * @return a MeasureSpec integer for the child
+	 */
+	public static int getChildMeasureSpec(int spec, int padding, int childDimension) {
+		int specMode = MeasureSpec.getMode(spec);
+		int specSize = MeasureSpec.getSize(spec);
+
+		int size = Math.max(0, specSize - padding);
+
+		int resultSize = 0;
+		int resultMode = 0;
+
+		switch (specMode) {
+		// Parent has imposed an exact size on us
+		case MeasureSpec.EXACTLY:
+			if (childDimension >= 0) {
+				resultSize = childDimension;
+				resultMode = MeasureSpec.EXACTLY;
+			} else if (childDimension == LayoutParams.MATCH_PARENT) {
+				// Child wants to be our size. So be it.
+				resultSize = size;
+				resultMode = MeasureSpec.EXACTLY;
+			} else if (childDimension == LayoutParams.WRAP_CONTENT) {
+				// Child wants to determine its own size. It can't be
+				// bigger than us.
+				resultSize = size;
+				resultMode = MeasureSpec.AT_MOST;
+			}
+			break;
+
+		// Parent has imposed a maximum size on us
+		case MeasureSpec.AT_MOST:
+			if (childDimension >= 0) {
+				// Child wants a specific size... so be it
+				resultSize = childDimension;
+				resultMode = MeasureSpec.EXACTLY;
+			} else if (childDimension == LayoutParams.MATCH_PARENT) {
+				// Child wants to be our size, but our size is not fixed.
+				// Constrain child to not be bigger than us.
+				resultSize = size;
+				resultMode = MeasureSpec.AT_MOST;
+			} else if (childDimension == LayoutParams.WRAP_CONTENT) {
+				// Child wants to determine its own size. It can't be
+				// bigger than us.
+				resultSize = size;
+				resultMode = MeasureSpec.AT_MOST;
+			}
+			break;
+
+		// Parent asked to see how big we want to be
+		case MeasureSpec.UNSPECIFIED:
+			if (childDimension >= 0) {
+				// Child wants a specific size... let him have it
+				resultSize = childDimension;
+				resultMode = MeasureSpec.EXACTLY;
+			} else if (childDimension == LayoutParams.MATCH_PARENT) {
+				// Child wants to be our size... find out how big it should
+				// be
+				resultSize = View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
+				resultMode = MeasureSpec.UNSPECIDIED:
+			} else if (childDimension == LayoutParams.WRAP_CONTENT) {
+				// Child wants to determine its own size.... find out how
+				// big it should be
+				resultSize = View.sUseZeroUnspecifiedMeasureSpec ? 0 : size;
+				resultMode = MeasureSpec.UNSPECIFIED;
+			}
+			break;
+		}
+		//noinspection ResourceType
+		return MeasureSpec.makeMeasureSpec(resultSize, resultMode);
+	}
+}
+
+getChildMeasureSpec()实现了child view根据其parent view，由ViewGroup.LayoutParams转换为MeasureSpec的过程。
