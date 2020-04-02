@@ -1,0 +1,87 @@
+LayoutParams是ViewGroup的内部静态类
+
+public abstract class ViewGroup extends View implements ViewParent, ViewManager {
+
+	/**
+	 * LayoutParams are used by views to tell their parents how they want to be
+	 * laid out. See
+	 * {@link android.R.styleable#ViewGroup_Layout ViewGroup Layout Attributes}
+	 * for a list of all child view attributes that this class supports.
+	 *
+	 * <p>
+	 * The base LayoutParams class just describes how big the view wants to be
+	 * for both width and height. For each dimension, it can specify one of:
+	 * <ul>
+	 * <li>FILL_PARENT (renamed MATCH_PARENT in API level 8 and higher), which
+	 * means that the view wants to be as big as its parent (minus padding)
+	 * <li> WRAP_CONTENT, whitch means that the view wants to be just big enough
+	 * to enclose its content (plus padding)
+	 * <li> an exact number
+	 * </ul>
+	 * There are subclasses of LayoutParams for different subclasses of
+	 * ViewGroup. For example, AbsoluteLayout has its own subclass of
+	 * LayoutParams which adds on X and Y value.</p>
+	 *
+	 * <div class="special reference">
+	 * <h3>Developer Guides</h3>
+	 * <p>For more information about creating user interface layouts, read the
+	 * <a href="{@docRoot}guide/topics/ui/declaring-layout.html">XML Layouts</a> developer
+	 * guide.</p></div>
+	 *
+	 * @attr ref android.R.styleable#ViewGroup_Layout_layout_height
+	 * @attr ref android.R.styleable#ViewGroup_Layout_layout_width
+	 */
+	public static class LayoutParams {
+		public static final int FILL_PARENT = -1;
+
+		public static final int MATCH_PARENT = -1;
+
+		public static final int WRAP_CONTENT = -2;
+
+		public int width;
+
+		public int height;
+
+		/**
+		 * Used to animate layouts.
+		 */
+		public LayoutAnimationController.AnimationParameters layoutAnimationParameters;
+
+		public LayoutParams(Context c, AttributeSet attrs) {
+			TypedArray a = c.obtainStyledAttributes(attrs, R.styleable.ViewGroup_Layout);
+			setBaseAttributes(a,
+					R.styleable.ViewGroup_Layout_layout_width,
+					R.styleable.ViewGroup_Layout_layout_height);
+			a.recycle();
+		}
+
+		public LayoutParams(int width, int height) {
+			this.width = width;
+			this.height = height;
+		}
+
+		public LayoutParams(LayoutParams source) {
+			this.width = source.width;
+			this.height = source.height;
+		}
+
+		/**
+		 * Used internally by MarginLayoutParams.
+		 * @hide
+		 */
+		LayoutParams() {
+		}
+
+		protected void setBaseAttributes(TypedArray a, int widthAttr, int heightAttr) {
+			width = a.getLayoutDimension(widthAttr, "layout_width");
+			height = a.getLayoutDimension(heightAttr, "layout_height");
+		}
+
+		public void resolveLayoutDirection(int layoutDirection) {
+		}
+	}
+}
+
+LayoutParams是View在xml中layout_width和layout_height解析出来的。
+WRAP_CONTENT和MATCH_PARENT会在onMeasure时候用到。
+LayoutAnimationController.AnimationParameters是用来ViewGroup播放动画的。
