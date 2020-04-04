@@ -1,0 +1,104 @@
+MarginLayoutParams是ViewGroup的静态内部类
+
+public abstract class ViewGroup extends View implements ViewParent, ViewManager {
+
+    /**
+     * Per-child layout information for layouts that support margins.
+     * See
+     * {@link android.R.styleable#ViewGroup_MarginLayout ViwGroup Margin Layout Attributes}
+     * for a list of all child view attributes that this class supports.
+     *
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_margin
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_marginHorizontal
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_marginVertical
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_marginLeft
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_marginTop
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_marginRight
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_marginBottom
+     * @attr ref android.R.styleable#ViewGroup_MarginLayout_layout_marginStart
+     * @attr ref android.R.sytleable#ViewGroup_MarginLayout_layout_marginEnd
+     */
+    public static class MarginLayoutParams extends ViewGroup.LayoutParams {
+        /**
+         * The left margin in pixels of the child. Margin values should be positive.
+         * Call {@link ViewGroup#setLayoutParams(LayoutParams)} after reassigning a new value
+         * to this field.
+         */
+        public int leftMargin;
+
+        /**
+         * The top margin in pixels of the child. Margin values should be positive.
+         * Call {@link ViewGroup#setLayoutParams(LayoutParams)} after reassigning a new value
+         * to this field.
+         */
+        public int topMargin;
+
+        /**
+         * The right margin in pixels of the child. Margin values should be positive.
+         * Call {@link ViewGroup#setLayoutParams(LayoutParams)} after reassigning a new value
+         * to this field.
+         */
+        public int rightMargin;
+
+        /**
+         * The bottom margin in pixels of the child. Margin values should be positive.
+         * Call {@link ViewGroup#SetLayoutParams(LayoutParams)} after reassigning a new value
+         * to this field.
+         */
+        public int bottomMargin;
+
+        /**
+         * The start margin in pixels of the child. Margin values should be positive.
+         * Call {@link ViewGroup#setLayoutParams(LayoutParams)} after reassigning a new value
+         * to this field.
+         */
+        private int startMargin = DEFAULT_MARGIN_RELATIVE;
+
+        /**
+         * The end margin in pixels of the child. Margin values should be positive.
+         * Call {@link ViewGroup#setLayoutParams(LayoutParams)} after reassigning a new value
+         * to this field.
+         */
+        private int endMargin = DEFAULT_MARGIN_RELATIVE;
+
+        /**
+         * The default start and end margin.
+         * @hide
+         */
+        public static final int DEFAULT_MARGIN_RELATIVE = Integer.MIN_VALUE;
+
+        /**
+         * Bit 0: layout direction
+         * Bit 1: layout direction
+         * Bit 2: left margin undefined
+         * Bit 3: right margin undefined
+         * Bit 4: is RTL compatibility mode
+         * BIt 5: need resolution
+         *
+         * Bit 6 or 7 not used
+         *
+         * @hide
+         */
+        byte mMarginFlags;
+
+        private static final int LAYOUT_DIRECTION_MASK = 0x00000003;
+        private static final int LEFT_MARGIN_UNDEFINED_MASK = 0x00000004;
+        private static final int RIGHT_MARGIN_UNDEFINED_MASK = 0x00000008;
+        private static final int RTL_COMPATIBILITY_MODE_MASK = 0x00000010;
+        private static final int NEED_RESOLUTION_MASK = 0x00000020;
+
+        private static final int DEFAULT_MARGIN_RESOLVED = 0;
+        private static final int UNDEFINED_MARGIN = DEFAULT_MARGIN_RELATIVE;
+    }
+
+    protected LayoutParams generateLayoutParams(ViewGroup.LayoutParams p) {
+        return p;
+    }
+}
+
+结论：
+1. 所有android系统提供的View都支持margin的设置。如果是自定义ViewGroup，需要重写ViewGroup的
+generateLayoutParams方法。并且，返回的LayoutParams需要是MarginLayoutParams或其子类。
+2. 可以从源码看到startMargin和endMargin都是private的，在必要时，会被用来计算
+leftMargin和rightMargin（可以通过标志位判断是否需要计算）。
+3. 所有LayoutParams的单位都是px。
