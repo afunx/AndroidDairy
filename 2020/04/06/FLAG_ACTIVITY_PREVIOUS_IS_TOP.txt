@@ -1,0 +1,13 @@
+FLAG_ACTIVITY_PREVIOUS_IS_TOP是Intent.java的静态常量
+
+/**
+ * If set and this intent is being used to launch a new activity from an
+ * existing one, the current activity will not be counted as the top
+ * activity for deciding whether the new intent should be delivered to
+ * the top instead of starting a new one.  The previous activity will
+ * be used as the top, with the assumption being that the current activity
+ * will finish itself immediately.
+ */
+public static final int FLAG_ACTIVITY_PREVIOUS_IS_TOP = 0x04000000;
+
+FLAG_ACTIVITY_PREVIOUS_IS_TOP作用即是它的字面意思。假装当前Activity的previous在最顶端(top)。
