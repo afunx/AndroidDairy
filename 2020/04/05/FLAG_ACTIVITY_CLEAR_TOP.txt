@@ -1,0 +1,41 @@
+FLAG_ACTIVITY_CLEAR_TOP是Intent.java的静态常量
+
+/**
+ * If set, and the activity being launched is already running in the
+ * current task, then instead of launching a new instance of that activity,
+ * all of the other activities on top ot it will be close and this Intent
+ * will be delivered to the (now on top) old activity as a new Intent.
+ *
+ * <p>For example, consider a task consisting of the activities: A, B, C, D.
+ * If D calls startActivity() with an Intent that resolves to the component
+ * of activity B, then C and D will be finished and B receive the given
+ * Intent, resulting the statk now being: A, B.
+ *
+ * <p>The currently running instance of activity B in the above example will
+ * either receive the new intent you are starting here in its
+ * onNewIntent() method, or be itself finished and restarted with the
+ * new intent.  If it has decalred its launch mode to be "multiple" (the
+ * default) and you have not set {@link #FLAG_ACTIVITY_SINGLE_TOP} in
+ * in the same intent, then it will be finished and re-created; for all other
+ * launch modes or if {@link FLAG_ACTIVITY_SINGLE_TOP} is set then this
+ * Intent will be delivered to the current instance's onNewIntent().
+ *
+ * <p>This launch mode can also be used to good effect in conjunction with
+ * {@link #FLAG_ACTIVITY_NEW_TASK}: if used to start the root activity
+ * of a task, it will bring any currently instance of that task
+ * to the foreground, and then clear it to its root state.  This is
+ * especially useful, for example, when launching an activity from the
+ * notification manager.
+ *
+ * <p>See
+ * <a href="{@docRoot}guide/topics/fundamentals/tasks-and-back-stack.html">Tasks and Back
+ * Stack</a> for more information about tasks.
+ */
+public static final int FLAG_ACTIVITY_CLEAR_TOP = 0x04000000;
+
+FLAG_ACTIVITY_CLEAR_TOP会清除被调用Activity所在task上面的Activity。
+默认情况下，目标Activity启动模式是mutiple的，此时，目标Activity
+会被finish后再create。除非设置了FLAG_ACTIVITY_SINGLE_TOP。
+那么，目标Activity不会finish和create，而是调用onNewIntent()。
+另外，FLAG_ACTIVITY_CLEAR_TOP和FLAG_ACTIVITY_NEW_TASK也经常被用在
+通知启动的Activity。
