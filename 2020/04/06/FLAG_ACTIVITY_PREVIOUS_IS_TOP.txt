@@ -11,3 +11,4 @@ FLAG_ACTIVITY_PREVIOUS_IS_TOP是Intent.java的静态常量
 public static final int FLAG_ACTIVITY_PREVIOUS_IS_TOP = 0x04000000;
 
 FLAG_ACTIVITY_PREVIOUS_IS_TOP作用即是它的字面意思。假装当前Activity的previous在最顶端(top)。
+通常被用在当前Activity在调用startActivity后，马上就会调用finish的场景中。
