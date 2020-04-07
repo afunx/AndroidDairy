@@ -1,0 +1,21 @@
+FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS是Intent.java中的静态常量
+
+/**
+ * If set, the new activity is not kept in the list of recently launched
+ * activities.
+ */
+public static final int FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS = 0x00800000;
+
+该属性等同于AndroidManifest.xml中activity的android:excludeFromRecents
+
+<activity android:name=".XxxActivity"
+	android:excludeFromRecents="true|false"
+	/>
+
+默认为false。该标志位为true时，按下home键后，activity就不在历史列表中可以选择了。
+在代码中，只能设置为true。若是代码中设置了FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS，
+无论AndroidManifest.xml中是什么值，系统都不会在历史历史列表中显示对应Activity了。
+
+除此之外，即使在相同taskAffinity中，每个Activity可以有自己的excludeFromRecents值。
+例如，A->B，A的excludeFromRecents=true，B的exlucdeFromRecents=false情况下，
+home返回之后，显示Activity B，但back键则直接返回桌面了，不再有A。
