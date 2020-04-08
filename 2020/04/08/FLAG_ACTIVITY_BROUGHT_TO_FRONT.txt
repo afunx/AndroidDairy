@@ -1,0 +1,13 @@
+FLAG_ACTIVITY_BROUGHT_TO_FRONT是Intent.java中的静态常量
+
+/**
+ * This flag is not normally set by application code, but set for you by
+ * the system as described in the
+ * {@link android.R.styleable#AndroidManifestActivity_launchMode
+ * launchMode} documentation for the singleTask mode.
+ */
+public static final int FLAG_ACTIVITY_BROUGHT_TO_FRONT = 0x00400000;
+
+英文注释说该flag被用在系统使用，被用在singleTask的launchMode中。
+然后，我也单独用demo来试了一下该flag，好像都没有作用。应该就是注释描述的:
+该标志位是被系统使用的，应用开发并不需要使用。
