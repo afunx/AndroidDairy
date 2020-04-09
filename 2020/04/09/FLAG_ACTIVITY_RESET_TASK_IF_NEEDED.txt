@@ -1,0 +1,14 @@
+FLAG_ACTIVITY_RESET_TASK_IF_NEEDED是Intent.java中的静态常量
+
+/**
+ * If set, and this activity is either being started in a new task or
+ * bringing to the top an existing task, then it will be launched as
+ * the front door of the task.  This will result in the application of
+ * any affinities needed to have that task in the proper state (either
+ * moving activities to or from it), or simply resetting that task to
+ * its initial state if needed.
+ */
+public static final int FLAG_ACTIVITY_RESET_TASK_IF_NEEDED = 0x00200000;
+
+设置该flag后，在新的task启动的Activity或者在当前task中的Acitvity被放到前台时，
+会重置task的状态。暂时未发现该标志位的具体用途。
