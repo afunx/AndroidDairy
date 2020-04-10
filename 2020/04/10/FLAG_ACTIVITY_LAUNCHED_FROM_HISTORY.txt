@@ -1,0 +1,14 @@
+FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY是Intent.java中的静态常量
+
+/**
+ * This flag is not normally set by application code, but set for you by
+ * the system if this activity is being launched from history
+ * (longpress home key).
+ */
+public static final int FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY = 0x00100000;
+
+这个flag一般是被系统添加的。如果启动Activity添加这个flag，最终就能读到这个flag。
+这个flag是用来区分Activity是否从历史Activity中启动的。
+
+触发方式为：back键（不是home！！！）返回桌面后，home键选择历史列表中的Activity
+（已被back导致destroy），系统就会自动添加这个flag。
