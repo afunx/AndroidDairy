@@ -1,0 +1,77 @@
+
+android:documentLaunchMode是Activity的属性。可以设置为4个值:
+none, never, always, intoExisting。默认为none。
+
+<activity android:name=".XxxActivity"
+	android:documentLaunchMode="none|never|always|intoExisting"
+	/>
+
+refer to:
+
+https://developer.android.com/guide/topics/manifest/activity-element#dlmode
+
+Value			Description
+"intoExisting"	The system searches for a task whose base intent's ComponentName and data URI match those of
+				the launching intent. If the system finds such a task, the system clears the task, and restarts with the
+				root activity receiving a call to onNewIntent(android.content.Intent). If the system does not
+				find such a task, the system creates a new task.
+
+"always"		The activity create a new task for the document, even if the document is already opened. This is the
+				same as setting both the FLAG_ACTIVITY_NEW_DOCUMENT and FLAG_ACTIVITY_MULTIPLE_TASK
+				flags.
+
+"none"			The activity does not create a new task for the activity. This is the default value, which creates a new
+				task only when FLAG_ACTIVITY_NEW_TASK is set. The overview screen treats the activity as it would
+				by default: it displays a single task for the app, which resumes from whatever activity the user last
+				invoked.
+
+"never"			The activity is not launched into a new document even if the Intent contains
+				FLAG_ACTIVITY_NEW_DOCUMENT. Setting this overrides the behavior of the
+				FLAG_ACTIVITY_NEW_DUOCUMENT and FLAG_ACTIVITY_MULTIPLE_TASK flags, if either of these
+				are set in the activity, and the overview screen displays a single task for the app, which resumes from
+				whatever activity the user last invoked.
+
+
+!!! Note: For values other than "none" and "never" the activity must be defined with launchMode="standard". If
+	this attribute is not specified, documentLaunchMode="none" is used.
+
+
+refer to:
+
+https://developer.android.com/guide/components/activities/recents#attr-doclaunch
+
+"intoExisting"
+		The activity reuses an existing task for the document. This is the same as setting the
+		FLAG_ACTIVITY_NEW_DOCUMENT flag without setting the FLAG_ACTIVITY_MULTILE_TASK flag, as described in
+		Using the Intent flag to add a task, above.
+
+"always"
+		The activity creates a new task for the document, even if the document is already opened. Using this value is the
+		same as setting both the FLAG_ACTIVITY_NEW_DOCUMENT and FLAG_ACTIVITY_MULTIPLE_TASK flags.
+
+"none"
+		The activity does not create a new task for the document. The Recents screen treats the activity as it would by
+		default: it displays a single task for the app, which resumes from whatever activity the user last invoked.
+
+"never"
+		The activity does not create a new task for the document. Setting this value override the behavior of the
+		FLAG_ACTIVITY_NEW_DOCUMENT and FLAG_ACTIVITY_MULTIPLE_TASK flags, if either of these are set in the intent,
+		and the Recents screen displays a single task for the app, which resumes from whatever activity the user last
+		invoked.
+
+
+!!! Note: For values other than none and never the activity must be defined with launchMode="standard". If this attribute is
+	not specified, documentLaunchMode="none" is used.
+
+
+document是android 5.0之后引入的机制。Activity处于不同document，可以显示在不同的Recents里。
+
+"intoExisting"	等同于flags设置了FLAG_ACTIVITY_NEW_DOCUMENT，但未设置FLAG_ACTIVITY_MULTIPLE_TASK。
+
+"always"		等同于flags同时设置了FLAG_ACTIVITY_NEW_DOCUMENT和FLAG_ACTIVITY_MULTIPLE_TASK。
+
+"none"			默认使用
+
+"never"			效果与"none"类似。除此之外，它会覆盖flags设置的FLAG_ACTIVITY_NEW_DOCUMENT和FLAG_ACTIVITY_MULTIPLE_TASK。
+
+注意：			除了"none"和"never"之外，其他的需要launchMode="standard"才会生效。否则，就会被设置为默认的"none"。
