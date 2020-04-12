@@ -1,0 +1,49 @@
+FLAG_ACTIVITY_NEW_DOCUMNET是Intent.java中的静态常量
+
+/**
+ * @deprecated As of API 21 this performs identically to
+ * {@lin #FLAG_ACTIVITY_NEW_DOCUMENT} which should be used instead of this.
+ */
+public static final int FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET = 0x00080000;
+
+/**
+ * This flag is used to open a document into a new task rooted at the activity launched
+ * by this Intent. Through the use of this flag, or its equivalent attribute,
+ * {@link android.R.attr#documentLaunchMode} multiple instances of the same activity
+ * containing different documents will appear in the recent tasks list.
+ *
+ * <p>The use of the activity attribute form of this,
+ * {@link android.R.attr#documentLaunchMode}, is
+ * preferred over the Intent flag described here. The attribute form allows the
+ * Activity to specify multiple document behavior for all launchers of the Activity
+ * whereas using this flag requires each Intent that launches the Activity to specify it.
+ ＊
+ ＊<p>Note that the default semantics of this flag w.r.t. whether the recents entry for
+ * it is kept after the activity is finished is different than the use of
+ * {@link #FLAG_ACTIVITY_NEW_TASK} and {@link android.R.attr#documentLaunchMode} -- if
+ * this flag is being used to create a recents entry, then by default that entry
+ * will be removed once the activity is finished.  You can modify this behavior with
+ * @link #FLAG_ACTIVITY_RETAIN_IN_RECENTS}.
+ *
+ * <p>FLAG_ACTIVITY_NEW_DOCUMENT may be used in conjunction with {@link
+ * #FLAG_ACTIVITY_MULTIPLE_TASK}. When used alone it is the
+ * equivalent of the Activity manifest specifying {@link
+ * android.R.attr#documentLaunchMode}="intoExisting". When used with
+ * FLAG_ACTIVITY_MULTIPLE_TASK it is the equivalent of the Activity manifest specifying
+ * {@link android.R.attr#documentLaunchMode}="always".
+ *
+ * Refer to {@link android.R.attr#documentLaunchMode} for more information.
+ *
+ * @see android.R.attr#documentLaunchMode
+ * @see #FLAG_ACTIVITY_MULTIPLE_TASK
+ */
+public static final int FLAG_ACTIVITY_NEW_DOCUMENT = FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
+
+
+android:documentLaunchMode优先于FLAG_ACTIVITY_NEW_DOCUMENT
+
+FLAG_ACTIVITY_NEW_DOCUMENT单独使用时，等同于
+android:documentLaunchMode="intoExisting"。
+
+FLAG_ACTIVITY_NEW_DOCUMENT和FLAG_ACTIVITY_MULTIPLE_TASK一起使用时，等同于
+android:documentLaunchMode="always"
