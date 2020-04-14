@@ -1,0 +1,26 @@
+FLAG_ACTIVITY_NO_USER_ACTION是Intent.java的静态常量
+
+/**
+ * If set, this flag will prevent the normal {@link android.app.Activity#onUserLeaveHint}
+ * callback from occuring on the current frontmost activity before it is
+ * paused as the newly-started activity is brought to the front.
+ *
+ * <p>Typically, an activity can rely on that callback to indicate that an
+ * explicit user action has caused their activity to be moved out of the
+ * foreground. The callback marks an appropriate point in the activity's
+ * lifesycle for it to dismiss any notifications that it intends to display
+ * "until the user has seen them," such as a blinking LED.
+ *
+ * <p>If an activity is ever started via any non-user-driven events such as
+ * phone-call receipt or an alarm handler, this flag should be passed to {@link
+ * Context#startActivity Context.startActivity}, ensuring that the pausing
+ * activity does not think the user has acknowledged its notification.
+ */
+public static final int FLAG_ACTIVITY_NO_USER_ACTION = 0x00040000;
+
+如果设置了这个标志，可以避免用户离开当前Activity时回调onUserLeaveHint()。
+通常，Activity可以通过这个回调表明有明确的用户行为将当前Activity切出前台。
+onUserLeaveHint()回调可以确认用户已经看到了通知。
+
+如果一个Activity并非用户驱动的事件，如打电话或者闹钟，这个标志位应该被设置
+在startActivity里，确保暂停Activity时，并不认为用户已经知道了通知。
