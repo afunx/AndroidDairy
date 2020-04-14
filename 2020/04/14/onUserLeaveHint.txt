@@ -1,0 +1,26 @@
+onUserLeaveHint()是Activity的回调方法。
+
+/**
+ * Called as part of the activity lifecycle when an activity is about to go
+ * into the background as the result of user choice.  For example, when the
+ * user presses the Home key, {@link #onUserLeaveHint} will be called, but
+ * when an incoming phone call causes the in-call Activity to be automitically
+ * brought to the foreground, {@link #onUserLeaveHint} will not be called on
+ * the activity being interrupted.  In cases when it is invoked, this method
+ * is called right before the activity's {@link #onPause} callback.
+ *
+ * <p>This callback and {@link #onUserInteraction} are intended to help
+ * activities manage status bar notifications intelligently; specifically,
+ * for helping activities determine the proper time to cancel a notification.
+ *
+ * @see #onUserInteraction()
+ */
+protected void onUserLeaveHint() {
+}
+
+用户按Home键时，onUserLeaveHint()会在onPause()之前被调用。
+用户按Back键时，onUserLeaveHint()并不会被调用。
+被电话打断时，并不会调用onUserLeaveHint()。
+
+如果是应用的话，添加FLAG_ACTIVITY_NO_USER_ACTION后，被打断Activity也不会调用
+onUserLeaveHint()。
