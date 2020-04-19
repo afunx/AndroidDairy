@@ -1,0 +1,13 @@
+FLAG_ACTIVITY_CLEAR_TASK是Intent.java的静态常量。
+
+/**
+ * If set in an Intent passed to {@link Context#startActivity Context.startActivity()},
+ * this flag will cause any existing task that would be associated with the
+ * activity to be cleared before the activity is started.  That is, the activity
+ * becomes the new root of an otherwise empty task, and any old activities
+ * are finished.  This can only be used in conjunction with {@link #FLAG_ACTIVITY_NEW_TASK}.
+ */
+public static final int FLAG_ACTIVITY_CLEAR_TASK = 0x00008000;
+
+FLAG_ACTIVITY_CLEAR_TASK必须与FLAG_ACTIVITY_NEW_TASK同时使用才能生效。
+startActivity的Intent加入以上两个falgs后，新启动的Activity会清除该task之前的所有Activivty。
