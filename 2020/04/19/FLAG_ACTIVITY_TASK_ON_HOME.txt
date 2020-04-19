@@ -1,0 +1,17 @@
+FLAG_ACTIVITY_TASK_ON_HOME是Intent.java中的静态常量。
+
+/**
+ * If set in an Intent passed to {@link Context#startActivity Context.startActivity()},
+ * this flag will cause a newly launching task to be placed on top of the current
+ * home activity task (if there is one).  That is, pressing back from the task
+ * will always return the user to home even if that was not the last activity they
+ * saw.  This can only be used in conjunction with {@link #FLAG_ACTIVITY_NEW_TASK}.
+ */
+public static final int FLAG_ACTIVITY_TASK_ON_HOME = 0x00004000;
+
+FLAG_ACTIVITY_TASK_ON_HOME只有和FLAG_ACTIVITY_NEW_TASK一起使用，才有作用。
+startActivity()中带有以上两个flags时，当需要新创建一个task时，Activity会被放入
+home activity task的最顶端。此时，按back键时，即使应用还有其他activity，
+也会返回到home。
+更详细的讨论，可以参考:
+https://stackoverflow.com/questions/21833402/difference-between-intent-flag-activity-clear-task-and-intent-flag-activity-task
