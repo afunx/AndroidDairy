@@ -1,0 +1,21 @@
+FLAG_ACTIVITY_RETAIN_IN_RECENTS是Intent.java的静态常量
+
+/**
+ * By default a document created by {@link #FLAG_ACTIVITY_NEW_DOCUMENT} will
+ * have its entery in recent tasks removed when the user closes it (with back
+ * or however else it may finish()). If you would like to instead allow the
+ * document to be kept in recents so that it can be re-launched, you can use
+ * this flag. When set and the task's activity is finished, the recents
+ * entery will remain in the interface for the user to re-launch it, like a
+ * recents entry for a top-level application.
+ * <p>
+ * The receiving activity can override this request with
+ * {@link android.R.attr#autoRemoveFromRecents} or by explicitly calling
+ * {@link android.app.Activity#finishAndRemoveTask()
+ * Activity.finishAndRemoveTask()}.
+ */
+public static final int FLAG_ACTIVITY_RETAIN_IN_RECENTS = 0x00002000;
+
+注释上说，添加FLAG_ACTIVITY_RETAIN_IN_RECENTS可以使startActivity的Activity
+即使被finish()了，其所在task，也可以保留在recents，即recent screen中。
+但是，实际调试中，暂时并未发现添加FLAG_ACTIVITY_RETAIN_IN_RECENTS与否的区别。
