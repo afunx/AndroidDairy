@@ -1,0 +1,14 @@
+FLAG_ACTIVITY_LAUNCH_ADJACENT是Intent.java的静态常量
+
+/**
+ * This flag is only used in split-screen multi-window mode. The new activity will be displayed
+ * adjacent to the one launching it. This can only be used in conjunction with
+ * {@link #FLAG_ACTIVITY_NEW_TASK}. Also, setting {@link #FLAG_ACTIVITY_MULTIPLE_TASK} is
+ * required if you want a new instance of an existing activity to be created.
+ */
+public static final int FLAG_ACTIVITY_LAUNCH_ADJACENT = 0x00001000;
+
+FLAG_ACTIVITY_LAUNCH_ADJACENT只能用在分屏的情况下，且必须与FLAG_ACTIVITY_NEW_TASK同时使用。
+可以让新的Activity显示在旧Activity的旁边。如果同时设置了FLAG_ACTIVITY_MULTIPLE_TASK，
+可以让已经存在的Activity创建在新的task中。
+（注意：同时设置是指以上3个flags都被设置了）
