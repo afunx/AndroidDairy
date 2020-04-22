@@ -1,0 +1,8 @@
+android:textAllCaps="true|false"
+
+android 5.0(21)及之后，默认值改为了true。
+该属性决定了是否使用大写来呈现文本。
+
+可以在styel中添加以下item来解决android 5.0之后默认值改为了true的问题:
+
+<item name="textAllCaps">false</item>
