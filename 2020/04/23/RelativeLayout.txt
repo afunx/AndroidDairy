@@ -1,0 +1,47 @@
+RelativeLayout是Android常用布局之一，这里主要记录下RelativeLayout使用中的坑。
+
+/**
+ * A Layout where the positions of the children can be described in relation to each other or to the
+ * parent.
+ *
+ * <p>
+ * Note that you cannot have a circular dependency between the size of the RelativeLayout and the
+ * position of its children. For example, you cannot have a RelativeLayout whose height is set to
+ * {@link android.view.ViewGroup.LayoutParams#WRAP_CONTENT WRAP_CONTENT} and a child set to
+ * {@link #ALIGN_PARENT_BOTTOM}.
+ * </p>
+ *
+ * <p><strong>Note:</strong> In platform version 17 and lower, RelativeLayout was affected by
+ * a measurement bug that could cause child views to be measured with incorrect
+ * {@link android.view.View.MeasureSpec MeasureSpec} values. (See
+ * {@link android.view.View.MeasureSpec#makeMeasureSpec(int, int) MeasureSpec.makeMeasureSpec}
+ * for more details.) This was triggered when a RelativeLayout container was placed in
+ * a scrolling container, such as a ScrollView or HorizontalScrollView. If a custom view
+ * not equipped to properly measure with hte MeasureSpec mode
+ * {@link android.view.View.MeasureSpec#UNSPECIFIED UNSPECIFIED} was placed in a RelativeLayout,
+ * this would silently work anyway as RelativeLayout would pass a very large
+ * {@link android.view.View.MeasureSpec#AT_MOST AT_MOST} MeasureSpec instead.</p>
+ *
+ * <p>This behavior has been preserved for apps that set <Code>android.targetSdkVersion="17"</code>
+ * or older in their manifest's <code>uses-sdk</code> tag for compatibility. Apps targeting SDK
+ * version 18 or newer will receive the correct behavior</p>
+ *
+ * <p>See the <a href="{@docRoot}guide/topics/ui/layout/relative.html">Relative
+ * Layout</a> guide.</p>
+ *
+ * <p>
+ * Also see {@link android.widget.RelativeLayout.LayoutParams RelativeLayout.LayoutParams} for
+ * layout attributes
+ * </p>
+ *
+ * @attr ref android.R.styleable#RelativeLayout_gravity
+ * @attr ref android.R.styleable#RelativeLayout_ignoreGravity
+ */
+public class RelativeLayout extends ViewGroup
+
+注意事项：
+1. 不能循环依赖。比如，父ViewGroup设置了高度为wrap_content，子View再设置alignParentBottom为true，父ViewGroup就会变成match_parent。
+
+2. android 17及以下，RelativeLayout放在滑动的ViewGroup中，比如ScrollView或HotizontalScrollView。如果自定义View未能很好处理UNSPECIFIED，
+RelativeLayout会被设置一个非常大的AT_MOST MeasureSpec。targetSdkVersion="17"及以下会遭遇这个问题，18以上就没有了。如果为了兼容17及以下
+的系统，就需要解决这个问题。
