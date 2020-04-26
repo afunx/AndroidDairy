@@ -1,0 +1,12 @@
+FLAG_RECEIVER_REGISTERED_ONLY是Intent.java中的静态常量。
+
+/**
+ * If set, when sending a broadcast only registered receivers will be
+ * called -- no BroadcastReceiver components will be launched.
+ */
+public static final int FLAG_RECEIVER_REGISTERED_ONLY = 0x40000000;
+
+设置FLAG_RECEIVER_REGISTERED_ONLY后，广播只会发送给动态注册的receivers。
+BroadcastReceiver组件不会被启动。
+
+该功能主要被google用在系统广播中，防止第三方应用监听系统广播进行自启动。
