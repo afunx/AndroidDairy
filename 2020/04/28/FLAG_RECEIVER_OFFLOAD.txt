@@ -1,0 +1,11 @@
+FLAG_RECEIVER_OFFLOAD是Intent.java中的静态常量
+
+/**
+ * If set, when sending a broadcast the recipient will be run on the offload queue.
+ *
+ * @hide
+ */
+public static final int FLAG_RECEIVER_OFFLOAD = 0x80000000;
+
+FLAG_RECEIVER_OFFLOAD可以让接收者运行在offload队列中。只有系统应用可用。
+Android Q中boot complete广播默认就用了FLAG_RECEIVER_OFFLOAD。
