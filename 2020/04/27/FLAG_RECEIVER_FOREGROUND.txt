@@ -1,0 +1,12 @@
+FLAG_RECEIVER_FOREGROUND是Intent.java的静态常量
+
+/**
+ * If set, when sending a broadcast the recipient is allowed to run at
+ * foreground priority, with a shorted timeout interval.  During normal
+ * broadcasts the receivers are not automatically hoisted out of the
+ * background priority class.
+ */
+public static final int FLAG_RECEIVER_FOREGROUND = 0x10000000;
+
+FLAG_RECEIVER_FOREGROUND可以让接收者以前台优先级运行，有更短的时间间隔。
+正常的广播接收者只是后台优先级，并且不会被自动提升。
