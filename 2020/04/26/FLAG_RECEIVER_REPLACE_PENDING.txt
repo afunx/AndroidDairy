@@ -1,0 +1,33 @@
+FLAG_RECEIVER_REPLACE_PENDING是Intent.java中的静态常量。
+
+/**
+ * If set, when sending a broadcast the new broadcast will replace
+ * any existing pending broadcast that matches it.  Matching is defined
+ * by {@link Intent#filterEquals(Intent) Intent.filterEquals} returning
+ * true for the intents of the two broadcasts.  When a match is found,
+ * the new broadcast (and receivers associated with it) will replace the
+ * existing one in the pending broadcast list, remaining at the same
+ * position in the list.
+ *
+ * <p>This flag is most typically used with sticky broadcasts, which
+ * only care about delivering the most recent values of the broadcast
+ * to their receivers.
+ */
+public static final int FLAG_RECEIVER_REPLACE_PENDING = 0x20000000;
+
+public boolean filterEquals(Intent other) {
+	if (other == null) {
+		return false;
+	}
+	if (!Objects.equals(this.mAction, other.mAction)) return false;
+	if (!Objects.equals(this.mData, other.mData)) return false;
+	if (!Objects.equals(this.mType, other.mType)) return false;
+	if (!Objects.equals(this.mPackage, other.mPackage)) return false;
+	if (!Objects.equals(this.mComponent, other.mComponent)) return false;
+	if (!Objects.equals(this.mCategories, other.mCategories)) return false;
+
+	return true;
+}
+
+FLAG_RECEIVER_REPLACE_PENDING的作用是替换PENDING的广播，判断依据为filterEquals(Intent other)。
+主要会被用在只关心最新数据的sticky广播中。
