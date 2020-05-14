@@ -1,0 +1,13 @@
+1. XXX/app/libs/xxx.aar
+
+2. XXX/app/build.gradle:
+
+respositories {
+	flatDir {
+		dirs 'libs'
+	}
+}
+
+dependencies {
+	implementation (name: 'xxx', ext: 'aar')
+}
