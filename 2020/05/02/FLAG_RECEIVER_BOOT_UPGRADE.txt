@@ -1,0 +1,11 @@
+FLAG_RECEIVER_BOOT_UPGRADE是Intent.java的静态常量
+
+/**
+ * Set when this broadcast is for a boot upgrade, a special mode that
+ * allows the broadcast to be sent before the system is ready and launches
+ * the app process with no providers running in it.
+ * @hide
+ */
+public static final int FLAG_RECEIVER_BOOT_UPGRADE = 0x02000000;
+
+FLAG_RECEIVER_BOOT_UPGRADE是系统升级重启的广播。系统启动完成之前，可以启动没有providers的接收广播的应用进程。
