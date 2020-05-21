@@ -1,0 +1,12 @@
+BadTokenException是WindowManager的异常。
+
+android.view.WindowManager$BadTokenException: Unable to add window -- 
+token null is not valid; is your activity running?
+
+出现这个异常的一个原因是使用了Application的Context来显示Dialog或Window等UI。
+只有系统Dialog或Window可以没有Token的时显示。其他应用的Dialog或Window等必需
+传入Activity的Context。
+
+要显示系统级Dialog或者说使用WindowManager.LayoutParams.type>=2000时，需要权限
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />。
+Android 6.0(M API 23)及以后需要动态申请该权限。
