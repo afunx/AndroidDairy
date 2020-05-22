@@ -1,0 +1,20 @@
+getWindowManagerService()是WindowManagerService.java中的方法:
+
+public static IWindowManager getWindowManagerService() {
+	synchronized (WindowManagerGlobal.class) {
+		if (sWindowManagerService == null) {
+			sWindowManagerService = IWindowManager.Stub.asInterface(
+					ServiceManager.getService("window"));
+			try {
+				sWindowManagerService = getWindowManagerService();
+				ValueAnimator.setDurationScale(sWindowManagerService.getCurrentAnimatorScale());
+			} catch (RemoteException e) {
+				Log.e(TAG, "Failed to get WindowManagerService, cannot set animator scale", e);
+			}
+		}
+		return sWindowManagerService;
+	}
+}
+
+这个方法的精妙之处为，使用递归的方法，保证了调用者调用后，一定会获取到IWindowManager的。
+并且，该方法也没有使用sleep进行轮询。
