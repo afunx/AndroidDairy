@@ -4,7 +4,12 @@ git format-patch -1 <commit>
 git am xxx.patch
 可以使用patch打补丁
 
-如果遇到冲突，先解决冲突，然后执行
+如果遇到冲突
+git am -3 xxx.patch
+
+再解决冲突
 git add xxx
+
+最后告诉git am冲突已解决
 git am --resolved
 
