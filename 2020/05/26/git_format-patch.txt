@@ -1,0 +1,10 @@
+git format-patch -1 <commit>
+可以输出提交为commit的一个patch文件
+
+git am xxx.patch
+可以使用patch打补丁
+
+如果遇到冲突，先解决冲突，然后执行
+git add xxx
+git am --resolved
+
