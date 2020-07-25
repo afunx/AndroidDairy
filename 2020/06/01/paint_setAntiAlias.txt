@@ -1,0 +1,4 @@
+paint.setAntiAlias(true)是用来设置抗锯齿的，可以让画面更顺滑。
+
+但有些时候，paint.setAntiAlias(true)也没有作用。可以直接给Canvas加上抗锯齿标志:
+canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG));
