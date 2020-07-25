@@ -21,4 +21,13 @@ center line到bottom line的长度为(descent+ascent)/2=x+descent
 若center line的y坐标为y0，求base line的y坐标
 y=y0+x=y0+x=y0+(descent+ascent)/2-descent=y0+(ascent-descent)/2
 
+以上y的计算中，ascent和descent都是采取的绝对值。但是，实际代码中，ascent为负数值，descent为正数值。
+所以，真正在代码中使用的是:
 
+Paint.FontMetrics fontMetrics = paint.getFontMetrics();
+// 中线位置
+float y0 = 100;
+// 基线位置
+float y = y0 - (fontMetrics.ascent + fontMetrics.descent)/2;
+
+paint.measureText(String text)可以用来获取text的宽度，常常和上述代码同时使用。
