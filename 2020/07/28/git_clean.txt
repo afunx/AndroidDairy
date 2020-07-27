@@ -1,0 +1,25 @@
+git clean: 删除untracked files
+
+常用options:
+-d
+目录
+
+-f
+--force
+强制执行
+
+-i
+--interactive
+交互式执行
+
+-n
+--dry-run
+并不真正执行，只是显示那些文件或文件夹会被删除
+
+常用组合:
+// 查看即将被删除目录及文件
+git clean -dn
+// 删除目录及文件
+git clean -df
+
+(注意: -i -f -n 三者互斥，并且必须有其中一个，否则命令会失败)
