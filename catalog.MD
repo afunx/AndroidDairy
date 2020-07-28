@@ -54,7 +54,7 @@ F
 <br/>
 [FLAG_ACTIVITY_NO_USER_ACTION](https://github.com/afunx/AndroidDairy/blob/master/2020/04/13/FLAG_ACTIVITY_NO_USER_ACTION.txt):  2020/04/13
 <br/>
-FLAG_ACTIVITY_REORDER_TO_FRONT](https://github.com/afunx/AndroidDairy/blob/master/2020/04/16/FLAG_ACTIVITY_REORDER_TO_FRONT.txt):  2020/04/16
+[FLAG_ACTIVITY_REORDER_TO_FRONT](https://github.com/afunx/AndroidDairy/blob/master/2020/04/16/FLAG_ACTIVITY_REORDER_TO_FRONT.txt):  2020/04/16
 <br/>
 [FLAG_ACTIVITY_NO_ANIMATION](https://github.com/afunx/AndroidDairy/blob/master/2020/04/17/FLAG_ACTIVITY_NO_ANIMATION.txt):  2020/04/17
 <br/>
@@ -84,23 +84,23 @@ FLAG_ACTIVITY_REORDER_TO_FRONT](https://github.com/afunx/AndroidDairy/blob/maste
 
 G
 <br/>
-generateLayoutParams:  2020/03/29
+[generateLayoutParams](https://github.com/afunx/AndroidDairy/blob/master/2020/03/29/generateLayoutParams.txt):  2020/03/29
 <br/>
-getChildMeasureSpec:  2020/04/01
+[getChildMeasureSpec](https://github.com/afunx/AndroidDairy/blob/master/2020/04/01/getChildMeasureSpec.txt):  2020/04/01
 <br/>
-getWindowManagerService:  2020/05/22
+[getWindowManagerService](https://github.com/afunx/AndroidDairy/blob/master/2020/05/22/getWindowManagerService.txt):  2020/05/22
 <br/>
-git_format-patch:  2020/05/26
+[git_format-patch](https://github.com/afunx/AndroidDairy/blob/master/2020/05/26/git_format-patch.txt):  2020/05/26
 <br/>
-git_clean:  2020/07/28
+[git_clean](https://github.com/afunx/AndroidDairy/blob/master/2020/07/28/git_clean.txt):  2020/07/28
 
 H
 
 I
 <br/>
-Interpolator:  2020/03/07
+[Interpolator](https://github.com/afunx/AndroidDairy/blob/master/2020/03/07/Interpolator.txt):  2020/03/07
 <br/>
-import_aar:  2020/05/01
+[import_aar](https://github.com/afunx/AndroidDairy/blob/master/2020/05/01/import_aar.txt):  2020/05/01
 
 J
 
@@ -108,91 +108,91 @@ K
 
 L
 <br/>
-launch_mode:  2020/03/04
+[launch_mode](https://github.com/afunx/AndroidDairy/blob/master/2020/03/04/launch_mode.txt):  2020/03/04
 <br/>
-ListView_ViewHolder:  2020/03/14
+[ListView_ViewHolder](https://github.com/afunx/AndroidDairy/blob/master/2020/03/14/ListView_ViewHolder.txt):  2020/03/14
 <br/>
-letterSpacing:  2020/03/26
+[letterSpacing](https://github.com/afunx/AndroidDairy/blob/master/2020/03/26/letterSpacing.txt):  2020/03/26
 <br/>
-LayoutParams:  2020/04/02
+[LayoutParams](https://github.com/afunx/AndroidDairy/blob/master/2020/04/02/LayoutParams.txt):  2020/04/02
 <br/>
-LayoutAnimationController:  2020/04/03
+[LayoutAnimationController](https://github.com/afunx/AndroidDairy/blob/master/2020/04/03/LayoutAnimationController.txt):  2020/04/03
 
 M
 <br/>
-makeAar:  2020/03/08
+[makeAar](https://github.com/afunx/AndroidDairy/blob/master/2020/03/08/makeAar.txt):  2020/03/08
 <br/>
-MeasureSpec:  2020/03/30
+[MeasureSpec](https://github.com/afunx/AndroidDairy/blob/master/2020/03/30/MeasureSpec.txt):  2020/03/30
 <br/>
-measureChild:  2020/03/31
+[measureChild](https://github.com/afunx/AndroidDairy/blob/master/2020/03/31/measureChild.txt):  2020/03/31
 <br/>
-MarginLayoutParams:  2020/04/04
+[MarginLayoutParams](https://github.com/afunx/AndroidDairy/blob/master/2020/04/04/MarginLayoutParams.txt):  2020/04/04
 
 N
 
 O
 <br/>
-onUserLeaveHint:  2020/04/14
+[onUserLeaveHint](https://github.com/afunx/AndroidDairy/blob/master/2020/04/14/onUserLeaveHint.txt):  2020/04/14
 <br/>
-onUserInteraction:  2020/04/15
+[onUserInteraction](https://github.com/afunx/AndroidDairy/blob/master/2020/04/15/onUserInteraction.txt):  2020/04/15
 
 P
 <br/>
-Paint.Cap:  2020/02/27
+[Paint.Cap](https://github.com/afunx/AndroidDairy/blob/master/2020/02/27/Paint.Cap.txt):  2020/02/27
 <br/>
-Paint.Join:  2020/02/28
+[Paint.Join](https://github.com/afunx/AndroidDairy/blob/master/2020/02/28/Paint.Join.txt):  2020/02/28
 <br/>
-Pools:  2020/03/11
+[Pools](https://github.com/afunx/AndroidDairy/blob/master/2020/03/11/Pools.txt):  2020/03/11
 <br/>
-paint_setAntiAlias:  2020/06/01
+[paint_setAntiAlias](https://github.com/afunx/AndroidDairy/blob/master/2020/06/01/paint_setAntiAlias.txt):  2020/06/01
 
 Q
 
 R
 <br/>
-RECEIVE_BOOT_COMPLETED:  2020/02/26
+[RECEIVE_BOOT_COMPLETED](https://github.com/afunx/AndroidDairy/blob/master/2020/02/26/RECEIVE_BOOT_COMPLETED.txt):  2020/02/26
 <br/>
-raw_path:  2020/03/02
+[raw_path](https://github.com/afunx/AndroidDairy/blob/master/2020/03/02/raw_path.txt):  2020/03/02
 <br/>
-RotateDrawable: 2020/03/06
+[RotateDrawable](https://github.com/afunx/AndroidDairy/blob/master/2020/03/06/RotateDrawable.txt): 2020/03/06
 <br/>
-RetrofitFormdata.txt:  2020/03/13
+[RetrofitFormdata.txt](https://github.com/afunx/AndroidDairy/blob/master/2020/03/13/RetrofitFormdata.txt):  2020/03/13
 <br/>
-RecyclerView_LinearLayoutManager.txt:  2020/03/17
+[RecyclerView_LinearLayoutManager.txt](https://github.com/afunx/AndroidDairy/blob/master/2020/03/17/RecyclerView_LinearLayoutManager.txt):  2020/03/17
 <br/>
-RecyclerView_Click.txt:  2020/03/18
+[RecyclerView_Click.txt](https://github.com/afunx/AndroidDairy/blob/master/2020/03/18/RecyclerView_Click.txt):  2020/03/18
 <br/>
-RecyclerView_ViewType.txt:  2020/03/20
+[RecyclerView_ViewType.txt](https://github.com/afunx/AndroidDairy/blob/master/2020/03/20/RecyclerView_ViewType.txt):  2020/03/20
 <br/>
-RelativeLayout.txt:  2020/04/24
+[RelativeLayout.txt](https://github.com/afunx/AndroidDairy/blob/master/2020/04/24/FLAG_ACTIVITY_MATCH_EXTERNAL.txt):  2020/04/24
 
 S
 <br/>
-scaleType:  2020/02/23
+[scaleType](https://github.com/afunx/AndroidDairy/blob/master/2020/02/23/scaleType.txt):  2020/02/23
 <br/>
-ShapeDrawable:  2020/02/29
+[ShapeDrawable](https://github.com/afunx/AndroidDairy/blob/master/2020/02/29/ShapeDrawable.txt):  2020/02/29
 <br/>
-SYSTEM_ALERT_WINDOW: 2020/03/01
+[SYSTEM_ALERT_WINDOW](https://github.com/afunx/AndroidDairy/blob/master/2020/03/01/SYSTEM_ALERT_WINDOW.txt): 2020/03/01
 <br/>
-setWillNotDraw:  2020/03/05
+[setWillNotDraw](https://github.com/afunx/AndroidDairy/blob/master/2020/03/05/setWillNotDraw.txt):  2020/03/05
 <br/>
-StartService: 2020/03/09
+[StartService](https://github.com/afunx/AndroidDairy/blob/master/2020/03/09/StartService.txt): 2020/03/09
 <br/>
-SQLiteOpenHelper_Simple: 2020/03/19
+[SQLiteOpenHelper_Simple](https://github.com/afunx/AndroidDairy/blob/master/2020/03/19/SQLiteOpenHelper_Simple.txt): 2020/03/19
 
 T
 <br/>
-textScaleX:  2020/03/27
+[textScaleX](https://github.com/afunx/AndroidDairy/blob/master/2020/03/27/textScaleX.txt):  2020/03/27
 <br/>
-textAllCaps:  2020/04/21
+[textAllCaps](https://github.com/afunx/AndroidDairy/blob/master/2020/04/21/textAllCaps.txt):  2020/04/21
 
 U
 
 V
 <br/>
-VideoView:  2020/03/03
+[VideoView](https://github.com/afunx/AndroidDairy/blob/master/2020/03/03/VideoView.txt):  2020/03/03
 <br/>
-view_custom_attributes:  2020/03/28
+[view_custom_attributes](https://github.com/afunx/AndroidDairy/blob/master/2020/03/28/view_custom_attributes.txt):  2020/03/28
 
 W
 
