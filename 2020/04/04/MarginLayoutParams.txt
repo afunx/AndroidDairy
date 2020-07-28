@@ -1,4 +1,4 @@
-MarginLayoutParamsÊÇViewGroupµÄ¾²Ì¬ÄÚ²¿Àà
+MarginLayoutParamsæ˜¯ViewGroupçš„é™æ€å†…éƒ¨ç±»ã€‚
 
 public abstract class ViewGroup extends View implements ViewParent, ViewManager {
 
@@ -96,9 +96,9 @@ public abstract class ViewGroup extends View implements ViewParent, ViewManager 
     }
 }
 
-½áÂÛ£º
-1. ËùÓĞandroidÏµÍ³Ìá¹©µÄView¶¼Ö§³ÖmarginµÄÉèÖÃ¡£Èç¹ûÊÇ×Ô¶¨ÒåViewGroup£¬ĞèÒªÖØĞ´ViewGroupµÄ
-generateLayoutParams·½·¨¡£²¢ÇÒ£¬·µ»ØµÄLayoutParamsĞèÒªÊÇMarginLayoutParams»òÆä×ÓÀà¡£
-2. ¿ÉÒÔ´ÓÔ´Âë¿´µ½startMarginºÍendMargin¶¼ÊÇprivateµÄ£¬ÔÚ±ØÒªÊ±£¬»á±»ÓÃÀ´¼ÆËã
-leftMarginºÍrightMargin£¨¿ÉÒÔÍ¨¹ı±êÖ¾Î»ÅĞ¶ÏÊÇ·ñĞèÒª¼ÆËã£©¡£
-3. ËùÓĞLayoutParamsµÄµ¥Î»¶¼ÊÇpx¡£
+ç»“è®ºï¼š
+1. æ‰€æœ‰androidç³»ç»Ÿæä¾›çš„Viewéƒ½æ”¯æŒmarginçš„è®¾ç½®ã€‚å¦‚æœæ˜¯è‡ªå®šä¹‰ViewGroupï¼Œéœ€è¦é‡å†™ViewGroupçš„
+generateLayoutParamsæ–¹æ³•ã€‚å¹¶ä¸”ï¼Œè¿”å›çš„LayoutParamséœ€è¦æ˜¯MarginLayoutParamsæˆ–å…¶å­ç±»ã€‚
+2. å¯ä»¥ä»æºç çœ‹åˆ°startMarginå’ŒendMarginéƒ½æ˜¯privateçš„ï¼Œåœ¨å¿…è¦æ—¶ï¼Œä¼šè¢«ç”¨æ¥è®¡ç®—
+leftMarginå’ŒrightMarginï¼ˆå¯ä»¥é€šè¿‡æ ‡å¿—ä½åˆ¤æ–­æ˜¯å¦éœ€è¦è®¡ç®—ï¼‰ã€‚
+3. æ‰€æœ‰LayoutParamsçš„å•ä½éƒ½æ˜¯pxã€‚
