@@ -1,4 +1,4 @@
-FLAG_RECEIVER_FOREGROUNDÊÇIntent.javaµÄ¾²Ì¬³£Á¿
+FLAG_RECEIVER_FOREGROUNDæ˜¯Intent.javaçš„é™æ€å¸¸é‡
 
 /**
  * If set, when sending a broadcast the recipient is allowed to run at
@@ -8,5 +8,5 @@ FLAG_RECEIVER_FOREGROUNDÊÇIntent.javaµÄ¾²Ì¬³£Á¿
  */
 public static final int FLAG_RECEIVER_FOREGROUND = 0x10000000;
 
-FLAG_RECEIVER_FOREGROUND¿ÉÒÔÈÃ½ÓÊÕÕßÒÔÇ°Ì¨ÓÅÏÈ¼¶ÔËÐÐ£¬ÓÐ¸ü¶ÌµÄÊ±¼ä¼ä¸ô¡£
-Õý³£µÄ¹ã²¥½ÓÊÕÕßÖ»ÊÇºóÌ¨ÓÅÏÈ¼¶£¬²¢ÇÒ²»»á±»×Ô¶¯ÌáÉý¡£
+FLAG_RECEIVER_FOREGROUNDå¯ä»¥è®©æŽ¥æ”¶è€…ä»¥å‰å°ä¼˜å…ˆçº§è¿è¡Œï¼Œæœ‰æ›´çŸ­çš„æ—¶é—´é—´éš”ã€‚
+æ­£å¸¸çš„å¹¿æ’­æŽ¥æ”¶è€…åªæ˜¯åŽå°ä¼˜å…ˆçº§ï¼Œå¹¶ä¸”ä¸ä¼šè¢«è‡ªåŠ¨æå‡ã€‚
