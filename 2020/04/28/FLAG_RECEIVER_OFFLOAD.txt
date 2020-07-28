@@ -1,4 +1,4 @@
-FLAG_RECEIVER_OFFLOADÊÇIntent.javaÖĞµÄ¾²Ì¬³£Á¿
+FLAG_RECEIVER_OFFLOADæ˜¯Intent.javaä¸­çš„é™æ€å¸¸é‡ã€‚
 
 /**
  * If set, when sending a broadcast the recipient will be run on the offload queue.
@@ -7,5 +7,5 @@ FLAG_RECEIVER_OFFLOADÊÇIntent.javaÖĞµÄ¾²Ì¬³£Á¿
  */
 public static final int FLAG_RECEIVER_OFFLOAD = 0x80000000;
 
-FLAG_RECEIVER_OFFLOAD¿ÉÒÔÈÃ½ÓÊÕÕßÔËĞĞÔÚoffload¶ÓÁĞÖĞ¡£Ö»ÓĞÏµÍ³Ó¦ÓÃ¿ÉÓÃ¡£
-Android QÖĞboot complete¹ã²¥Ä¬ÈÏ¾ÍÓÃÁËFLAG_RECEIVER_OFFLOAD¡£
+FLAG_RECEIVER_OFFLOADå¯ä»¥è®©æ¥æ”¶è€…è¿è¡Œåœ¨offloadé˜Ÿåˆ—ä¸­ã€‚åªæœ‰ç³»ç»Ÿåº”ç”¨å¯ç”¨ã€‚
+Android Qä¸­boot completeå¹¿æ’­é»˜è®¤å°±ç”¨äº†FLAG_RECEIVER_OFFLOADã€‚
