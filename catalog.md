@@ -117,6 +117,8 @@ L
 [LayoutParams](https://github.com/afunx/AndroidDairy/blob/master/2020/04/02/LayoutParams.txt):  2020/04/02
 <br/>
 [LayoutAnimationController](https://github.com/afunx/AndroidDairy/blob/master/2020/04/03/LayoutAnimationController.txt):  2020/04/03
+<br/>
+[Looper](https://github.com/afunx/AndroidDairy/blob/master/2020/07/29/Looper.txt):  2020/07/29
 
 M
 <br/>

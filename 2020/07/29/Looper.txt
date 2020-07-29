@@ -1,0 +1,36 @@
+Looper一般这样使用：
+
+class LooperThread extends Thread {
+	public Handler mHandler;
+
+	public void run() {
+		Looper.prepare();
+
+		mHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				// process incoming messages here
+			}
+		};
+
+		Looper.loop();
+	}
+}
+
+真正使用的地方需要先调用LooperThread的start()方法，然后即可使用LoopThread的mHandler来发送消息了。
+
+
+但是，Handler会导致内存泄漏问题。通常可以这样处理：
+static class StaticHandler<T> extends Handler {
+    WeakReference<T> mObjectReference;
+    StaticHandler(T object) {
+        mObjectReference= new WeakReference<>(object);
+    }
+    @Override
+    public void handleMessage(Message msg) {
+        final T object = mObjectReference.get();
+        if (object != null) {
+            // process incoming messages here
+        }
+    }
+}
+其中，T请根据实际使用场景，进行更改。
