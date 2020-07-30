@@ -95,6 +95,9 @@ G
 [git_clean](https://github.com/afunx/AndroidDairy/blob/master/2020/07/28/git_clean.txt):  2020/07/28
 
 H
+<br/>
+[HandlerThread](https://github.com/afunx/AndroidDairy/blob/master/2020/07/30/HandlerThread.txt):  2020/07/30
+
 
 I
 <br/>

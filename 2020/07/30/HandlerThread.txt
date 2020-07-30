@@ -1,0 +1,57 @@
+HandlerThread是Android系统的Handler线程，核心代码如下：
+
+public class HandlerThread extends Thread {
+	int mPriority;
+	int mTid = -1;
+	Looper mLooper;
+	private @Nullable Handler mHandler;
+
+	@Override
+	public void run() {
+		mTid = Process.myTid();
+		Looper.prepare();
+		synchronized (this) {
+			mLooper = Looper.myLooper();
+			notifyAll();
+		}
+		Process.setThreadPriority(mPriority);
+		onLooperPrepared();
+		Looper.loop();
+		mTid = -1;
+	}
+
+	public Looper getLooper() {
+		if (!isAlive()) {
+			return null;
+		}
+
+		// If the thread has been started, wait until the looper has been created.
+		synchronized(this) {
+			while(isAlive() && mLooper == null) {
+				try {
+					wait();
+				} catch (InterruptedException e) {
+				}
+			}
+		}
+		return mLooper;
+	}
+}
+
+
+使用方法:
+
+HandlerThread handlerThread = new HandlerThread("HandlerThread");
+handlerThread.start();
+
+// 必须在handlerThread.start()之后调用handlerThread.getLooper()。
+// 否则，handlerThread.getLooper()会造成死锁，执行不下去。
+Handler handler = new Handler(handlerThread.getLooper()) {
+	@Override
+	public void handleMessage(Message msg) {
+		// process incoming messages here
+		// 这里是在HandlerThread线程执行的，并非UI主线程
+	}
+};
+
+handler.sendEmptyMessage(1000);
