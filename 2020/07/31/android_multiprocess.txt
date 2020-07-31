@@ -1,0 +1,37 @@
+android:multiprocesss是一个标签，可以用在provider中和activity中。
+
+在Provider中，
+
+<provider android:multiprocess=["true" | "false"]
+</provider>
+
+If the app runs in multiple processes, this attribute determines whether multiple instances of the content
+provider are created. If true, each of the app's processes has its own content provider object. If false, the
+app's processes share only one content provider object. The default value is false.
+
+Setting this flag to true may improve performance by reducing the overhead of interprocess
+communication, but it also increases the memory footprint of each process.
+
+以上主要解释在provider中，默认为false，表示多个进程共享相同的provider。当multiprocess为true时，多个进程拥有自己
+的provider。当multiprocess为true时，会减少进程间通信的开销，但会因为每个进程拥有自己的provider，增加内存占用。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/provider-element?hl=en#multi
+
+
+在Activity中，
+
+<activity android:multiprocess=["true" | "false"]
+</activity>
+
+Whether an instance of the activity can be launched into the process of the component that started it -
+"true" if it can be, and "false" if not. The default value is "false".
+
+Normally, a new instance of an activity is launched into the process of the application that defined it, so all
+instances of the activity run in the same process. However, if this flag is set to "true", instances of the
+activity can run in multiple processes, allowing the system to create instances wherever they are used
+(profided permissions allow it), something that is almost never necessary or desirable.
+
+以上主要解释在activity中，默认为false，表示activity运行在所在application的进程中。当multiprocess为true时，
+activity就可以运行在启动activity的进程中。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=en#multi

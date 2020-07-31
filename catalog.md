@@ -1,16 +1,18 @@
 # Catalog
 
 A
+<br/>
+[android_multiprocess](https://github.com/afunx/AndroidDairy/blob/master/2020/07/31/android_multiprocess.txt):  2020/07/31
 
 B
 <br/>
 [bseline](https://github.com/afunx/AndroidDairy/blob/master/2020/02/25/baseline.txt):  2020/02/25
 <br/>
-[BindServiceLocal](https://github.com/afunx/AndroidDairy/blob/master/2020/03/10/BindServiceLocal.txt): 2020/03/10
+[BindServiceLocal](https://github.com/afunx/AndroidDairy/blob/master/2020/03/10/BindServiceLocal.txt):  2020/03/10
 <br/>
-[BindServiceAidl](https://github.com/afunx/AndroidDairy/blob/master/2020/03/12/BindServiceAidl.txt): 2020/03/12
+[BindServiceAidl](https://github.com/afunx/AndroidDairy/blob/master/2020/03/12/BindServiceAidl.txt):  2020/03/12
 <br/>
-[BadTokenException](https://github.com/afunx/AndroidDairy/blob/master/2020/05/21/BadTokenException.txt): 2020/05/21
+[BadTokenException](https://github.com/afunx/AndroidDairy/blob/master/2020/05/21/BadTokenException.txt):  2020/05/21
 
 C
 <br/>
