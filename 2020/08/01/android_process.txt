@@ -1,0 +1,100 @@
+android:process是一个标签，可以用字在Activity，Application，Provider和Service中。
+
+在Activity中，
+
+<activity android:process="string"
+</activity>
+
+The name of the process in which the activity should run. Normally, all components of an application run in a
+default process name created for the application and you do not need to use this attribute. But if necessary,
+you can override the default process name with this attribute, allowing you to spread your app components
+across multiple processes.
+
+If the name assigned to this attribute begins with a colon (':'), a new process, private to the application, is
+created when it's needed and the activity runs in that process. If the process name begins with a lowercase
+character, the activity will run in a global process of that name, provided that it has permission to do so. This
+allows components in different applications to share a process, reducing resource usage.
+
+The <application> element's process attribute can set a different default process name for all
+components.
+
+以上内容如果直接按照英文翻译，会让人非常不解。经过实践后，得出这样的结论:
+定义str为字符串，包含大小写字母、数字、'.'(注意:不包含':')。其中，数字不能放在首位。
+
+1. 如果process以':'+str形式，那么最终进程为applicationId + ':' + str。':'只能放在首位，
+以此确保了':'+str为application私有进程。
+2. 如果process以str形式，str中必须包含至少一个'.'，且允许出现在首位。此时，该进程属于
+全局共有的，权限允许时，其他activity也能运行在相同的进程中。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=en#proc
+
+
+在Application中,
+
+<application android:process="string"
+</activity>
+
+The name of a process where all components of the application should run. Each component can override
+this default by setting its own process attribute.
+
+By default, Android creates a process for an application when the first of its components needs to run. All
+components then run in that process. The name of the default process matches the packages name set by the
+<manifest> element.
+
+By setting this attribute to a process name that's shared with another application, you can arrange for
+components of both applications to run in the same process -- but only if the two applications also share a
+user ID and be signed with the same certificate.
+
+If the name assigned to this attribute begins with a colon(':'), a new process, private to the application, is
+created when it's needed. If the process name begins with a lowercase character, a global process of that
+name is created. A global process can be shared with other applications, reducing resource usage.
+
+以上内容除了Activity中提到的规则外，还增加了几点application独有的:
+1. application中的component默认为application的process，但也可另外设置。
+2. 当application中的某个component需要运行时，android才为这个application创建一个进程并启动之。
+3. 默认process为applicationId(实际测试当applicationId和manifest的packagename不同时，以applicationId为准。)
+4. 多个应用可以运行在同一进程中，但需要满足以两个条件: (1) 相同的user ID (2) 相同的签名证书
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/application-element?hl=en#proc
+
+
+在Provider中,
+
+<provider android:process="string"
+</provider>
+
+The name of the process in which the content provider should run. Normally, all components of an application
+run in the default process created for the application. It has the same name as the application package. The
+<application> element's process attribute can set a different default for all components. But each
+component can override the default with its own process attribute, allowing you to spread your application
+across multiple processes.
+
+If the name assigned to this attribute begins with a colon (':'), a new process, private to the application, is
+created when it's needed and the activity runs in that process. If the process name begins with a lowercase
+character, the activity will run in a global process of that name, provided that it has permission to do so. This
+allows components in different applications to share a process, reducing resource usage.
+
+以上内容与Activity中提到的基本相同，不再累述。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/provider-element?hl=en#proc
+
+
+在Service中,
+
+<service android:process="string"
+</service>
+
+The name of the process where the service is to run. Normally, an components of an application run in the
+default process created for the application. It has the same name as the application package. The
+<application> element's process attribute can set a different default for all components. But component
+can override the default with its own process attribute, allowing you to spread your application across
+multiple processes.
+
+If the name assigned to this attribute begins with a colon (':'), a new process, private to the application, is
+created when it's needed and the service runs in that process. If the process name begins with a lowercase
+character, the service will run in a global process of that name, provided that it has permission to do so. This
+allows components in different applications to share a process, reducing resource usage.
+
+以上内容与Activity中提到的基本相同，不再累述。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/service-element?hl=en#proc

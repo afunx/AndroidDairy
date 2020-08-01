@@ -3,6 +3,8 @@
 A
 <br/>
 [android_multiprocess](https://github.com/afunx/AndroidDairy/blob/master/2020/07/31/android_multiprocess.txt):  2020/07/31
+<br/>
+[android_process](https://github.com/afunx/AndroidDairy/blob/master/2020/08/01/android_process.txt):  2020/08/01
 
 B
 <br/>
