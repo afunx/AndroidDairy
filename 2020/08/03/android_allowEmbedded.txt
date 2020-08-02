@@ -1,0 +1,18 @@
+android:allowEmbedded是一个标签，可以用在Activity中。
+
+在Activity中，
+
+<activity android:allowEmbedded=["true" | "false"]
+</activity>
+
+Indicate that the activity can be launched as the embedded child of another activity. Particularly in the case
+where the child lives in a container such as Display owned by another activity. For example, activities that
+are used for Wear custom notifacations must declare this so Wear can display the activity in it's context
+stream, which resides in another process.
+The default value of this attribute is false.
+
+以上主要解释在Activity中, allowEmbedded默认值为false。allowEmbedded表示该activity是否可以嵌入在其他activity中。
+尤其是Wear的自定义通知，用到了这项技术，它允许activity可以显示在context stream中另外一个进程所在activity的
+Display中。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=en#embedded

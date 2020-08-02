@@ -1,4 +1,4 @@
-android:process是一个标签，可以用字在Activity，Application，Provider和Service中。
+android:process是一个标签，可以用在Activity，Application，Provider和Service中。
 
 在Activity中，
 
