@@ -1,0 +1,56 @@
+android:allowTaskReparenting是一个标签，可以用在Application和Activity中。
+
+在Application中,
+
+<application android:allowTaskReparenting=["true" | "false"]
+</application>
+
+Whether or not activities that the application defines can move from the task that started them to the task
+they have an affinity for when that task is next brought to the front - "true" if they can move, and "false"
+if they must remain with the task where they started. The default value is "false".
+
+The <activity> element has its own allowTaskReparenting attribute that can override the value set
+here. See that attribute for more information.
+
+以上主要解释在Application中, allowTaskReparenting默认值为false。allowTaskReparenting表示是否允许activity移动
+到所属的affinity的task中。
+上述描述过于书面化。举个简单例子，就可以理解了。比如，应用A打开了应用B的ActivityC。按下Home键回到桌面。打开
+应用B，看到的并不是应用B的首页，而是ActivityC。应用A中的ActivityC被移动到了应用B中。当然, allowTaskReparenting
+被设置成了true。
+<activity>也可以重新定义自己的allowTaskReparenting值。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/application-element?hl=en#reparent
+
+
+在Activity中,
+
+<activity android:allowTaskReparenting=["true" | "false"]
+</activity>
+
+Whether or not the activity can move from the task that started it to the task it has an affinity for when that
+task is next brought to the front - "true" if it can move, and "false" if it must remain with the task where it
+started.
+
+If this attribute is not set, the value set by the corresponding allowTaskReparenting attribute of the
+<application> element applies to the activity. The default value is "false".
+
+Normally when an activity is started, it's associated with the task of the activity that started it and it stays
+there for its entire lifetime. You can use this attribute to force it to be re-parented to the task it has an affinity
+for when its current task is no longer is displayed. Typically, it's used to cause the activities of an application to
+move to the main task associated with that application.
+
+For example, if an e-mail message contains a link to a web page, clicking the link brings up an activity that
+can display the page. That activity is defined by the broser application, but is launched as part of the e-mail
+task. If it's reparented to the browser task, it will be shown when the browser next comes to the front, and will
+be absent when the e-mail task again comes forward.
+
+The affinity of an activity is defined by the taskAffinity attribute. The affinity of a task is determined by
+reading the affinity of its root activity. Therefore, by definition, a root activity is always in a task with the same
+affinity. Since activities with "singleTask" or "singleInstance" launch modes can only be at the root of a
+task, re-parenting is limited to the "standard" and "singleTop" modes. (See alwo the launchMode attribute.)
+
+以上主要解释了allowTaskReparenting的作用，请参考Application中的解释，不再累述。每个activity的taskAffinity由
+启动它们的root activity的taskAffinity决定。只有"standard"和"singleTop“的launchMode支持allowTakkReparenting。
+因为"singleTop"和"singleInstance"中的activity，始终都是root activity。
+
+参考自: https://developer.android.google.cn/guide/topics/manifest/activity-element?hl=en#reparent

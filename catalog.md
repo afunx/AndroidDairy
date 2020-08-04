@@ -7,6 +7,8 @@ A
 [android_process](https://github.com/afunx/AndroidDairy/blob/master/2020/08/01/android_process.txt):  2020/08/01
 <br/>
 [android_allowEmbedded](https://github.com/afunx/AndroidDairy/blob/master/2020/08/03/android_allowEmbedded.txt):  2020/08/03
+<br/>
+[android_allowTaskReparenting](https://github.com/afunx/AndroidDairy/blob/master/2020/08/04/android_allowTaskReparenting.txt):  2020/08/04
 
 B
 <br/>
