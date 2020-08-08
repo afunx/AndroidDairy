@@ -150,6 +150,8 @@ O
 [onUserLeaveHint](https://github.com/afunx/AndroidDairy/blob/master/2020/04/14/onUserLeaveHint.txt):  2020/04/14
 <br/>
 [onUserInteraction](https://github.com/afunx/AndroidDairy/blob/master/2020/04/15/onUserInteraction.txt):  2020/04/15
+<br/>
+[onSaveInstanceState](https://github.com/afunx/AndroidDairy/blob/master/2020/08/05/onSaveInstanceState.txt):  2020/08/05
 
 P
 <br/>

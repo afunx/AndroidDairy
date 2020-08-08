@@ -1,0 +1,188 @@
+onSaveInstanceState()和onRestoreInstanceState()是一对组合。前者用来保存UI状态，
+后者用来加载UI状态。它们被用在Activity、Fragment、ViewGroup、View中。
+
+
+在Activity中:
+onSaveInstanceState()方法族族签名如下:
+
+protected void onSaveInstanceState(Bundle outState);
+protected void onRestoreInstanceState(Bundle savedInstanceState);
+final void performSaveInstanceState(Bundle outState);
+final void performRestoreInstanceState(Bundle savedInstanceState);
+
+Android 21(5.0)开始，增加了Activity对于onSaveInstanceState的持久化支持:
+public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState);
+public void onRestoreInstanceState(Bundle saveInstanceState, PersistableBundle persistentState);
+final void performSaveInstanceState(Bundle outState, PersistableBundle outPersistentState);
+final void performRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState);
+
+从Android 28(9.0)开始，onSaveInstanceState()会在onStop()之后被调用。在之前的版本中，
+onSaveInstanceState()会在onStop()之前调用，但不保证是在onPause()之前或之后调用。
+对于Android 21(5.0)之后，持久化的支持，如下代码:
+
+public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+	onSaveInstanceState(outState);
+}
+
+public void onRestoreInstanceState(Bundle savedInstanceState, PersistableBundle persistentState) {
+	if (savedInstanceState != null) {
+		onRestoreInstanceState(savedInstanceState);
+	}
+}
+
+另外，整个onSaveInstanceState流的发起，也是由Activity发起的。如下代码:
+
+protected void onSaveInstanceState(Bundle outState) {
+	// 调用window的saveHierarchyState()
+	outState.putBundle(WINDOW_HIEARCHY_TAG, mWindow.saveHierarchyState());
+
+	outState.putInt(LASt_AUTOFILL_ID, mLastAutofillId);
+	// 调用FragmentController的saveAllState() -> FragmentManager的saveAllState()
+	// -> Fragment的performSaveInstanceState(Bundle outState)
+	Parcelable p = mFragments.saveAllState();
+	if (p != null) {
+		outState.putParcelable(FRAGMENTS_TAG, p);
+	}
+	if (mAutoFillResetNeeded) {
+		outState.putBoolean(AUTOFILL_RESET_NEEDED, true);
+		getAutofillManager().onSaveInstanceState(outState);
+	}
+	getApplication().dispatchActivitySaveInstanceState(this, outState);
+}
+
+Window是一个抽象类，实际会调用到PhoneWindow的saveHierarchyState()。如下代码:
+
+public Bundle saveHierarchyState() {
+	Bundle outState = new Bundle();
+	if (mContentParent == null) {
+		return outState;
+	}
+
+	SparseArray<Parcelable> states = new SparseArray<Parcelable>();
+	// 调用content的saveHierarchyState()
+	mContentParent.saveHierarchyState(state);
+	outState.putSparseParcelableArray(VIEW_TAG, states);
+
+	// Save the focused view ID.
+	final View focusedView = mContentParent.findFocus();
+	if (focusedView != null && focusedView.getId() != View.NO_ID) {
+		outState.putInt(FOCUSED_ID_TAG, focusedView.getId());
+	}
+
+	// save the panels
+	SparseArray<Parcelable> panelStates = new SparseArray<Parcelable>();
+	savePanelState(panelStates);
+	if (panelStates.size() > 0) {
+		outState.putSparseParcelableArray(PANELS_TAG, panelStates);
+	}
+
+	if (mDecorContentParent != null) {
+		SparseArray<Parcelable> actionBarStates = new SparseArray<Parcelable>();
+		mDecorContentParent.saveToolbarHierarchyState(actionBarStates);
+		outState.putSparseParcelableArray(ACTION_BAR_tAG, actionBarStates);
+	}
+
+	return outState;
+}
+
+在PhoneWindow.java中可以看到mContentParent是ViewGroup，代码如下:
+
+// This is the view in which the window contents are placed.  It is either
+// mDecor itself, or a child of mDecor where the contents go.
+ViewGroup mContentView;
+
+ViewGroup本身并没有saveHierarchyState方法。但ViewGroup继承自View。所以，
+最终调用了View的saveHierarchyState。
+
+在View中:
+onSaveInstanceState()方法族族签名如下:
+
+protected Parcelable onSaveInstanceState();
+protected void onRestoreInstanceState(Parcelable state);
+protected void dispatchSaveInstanceState(SparseArray<Parcelable> container);
+protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container);
+
+在ViewGroup，override了dispatchSaveInstanceState和dispatchRestoreInstanceState。
+如下代码:
+
+@Override
+protected void dispatchSaveInstanceState(SparseArray<Parcelable> container) {
+	super.dispatchSaveInstanceState(container);
+	final int count = mChildrenCount;
+	final View[] children = mChildren;
+	for (int i = 0; i < count; i++) {
+		View c = children[i];
+		if ((c.mViewFlags & PARENT_SAVE_DISABLED_MASK) != PARENT_SAVE_DISABLED) {
+			c.dispatchSaveInstanceState(container);
+		}
+	}
+}
+
+@Override
+protected void dispatchRestoreInstanceState(SparseArray<Parcelable> container) {
+	super.dispatchRestoreInstanceState(container);
+	final int count = mChildrenCount;
+	final View[] children = mChildren;
+	for (int i=0; i < count; i++) {
+		View c = children[i];
+		if ((c.mViewFlags & PARENT_SAVE_DISABLED_MASK) != PARENT_SAVE_DISABLED) {
+			c.dispatchRestoreInstanceState(container);
+		}
+	}
+}
+
+在Activity中，onSaveInstanceState流为:
+Activity.performSaveInstanceState() -> Activity.onSaveInstanceState()
+-> PhoneWindow.saveHierarchyState(); FragmentController.saveAllState()
+
+在PhoneWindow中，onSaveInstanceState流为:
+PhoneWindow.saveHierarchyState() -> View.saveHierarchyState()
+(该View实际为ViewGroup mContentVIew)
+-> ViewGroup.dispatchSaveInstanceState() -> View.dispatchSaveInstanceState()
+-> View.onSaveInstanceState()
+
+在FragmentController中，onSaveInstanceState流为:
+FragmentController.saveAllState() -> FragmentManagerImpl.saveAllState()
+(FragmentManagerImpl是FragmentManager的子类)
+-> FragmentManagerImpl.saveFragmentBasicState()
+-> Fragment.performSaveInstanceState(); FragmentManagerImpl.saveFragmentViewState()
+
+在Fragment中，onSaveInstanceState流为:
+Fragment.performSaveInstanceState() -> Fragment.onSaveInstanceState()
+
+在View中(mInnerView通常为ViewGroup)，onSaveInstanceState流为:
+FragmentManagerImpl.saveFramentViewState() -> View.saveHierarchyState()
+(该View实际为Fragment mInnerView，通常为ViewGroup)
+-> ViewGroup.saveHierarchyState() -> ViewGroup.dispatchSaveInstanceState()
+-> View.dispatchSaveInstanceState() -> View.onSaveInstanceState()
+
+在Fragment.java中可以看到mInnerView是View，代码如下:
+// The real inner view that will save/restore state.
+View mInnerView
+
+关于onRestoreInstanceState流:
+
+在Activity中, onRestoreInstanceState流为:
+Activity.performRestoreInstanceState() -> Activity.onRestoreInstanceState()
+-> PhoneWindow.restoreHierarchyState()
+
+在PhoneWindow中, onRestoreInstanceState流为:
+PhoneWindow.restoreHierarchyState() -> View.restoreHierarchyState()
+(该View实际为ViewGroup mContentView)
+-> ViewGroup.dispatchRestoreInstanceState() -> View.dispatchRestoreInstanceState()
+-> View.onRestoreInstanceState()
+
+因为onRestoreInstanceState被调用时, savedInstanceState必定不为null，所以可能存在Activity不调用
+onRestoreInstaceState()而Fragment调用onRestoreInstanceState()的情况。
+所以，Frament的onRestoreInstanceState流为:
+Activity.onCreate() -> FragmentController.restoreAllState()
+-> FragmentManagerImpl.restoreAllState() -> FragmentManagerImpl.restoreSaveState()
+-> FragmentManagerImpl.moveToState() -> Fragment.restoreViewState()
+-> View.restoreHierarchyState() (该View实际为Fragment mInnerView); Fragment.onViewStateRestored();
+
+在View中(mInnerView通常为ViewGroup), onRestoreInstanceState流为:
+ViewGroup.restoreHierarchyState() -> ViewGroup.dispatchSaveInstanceState()
+-> View.dispatchRestoreInstanceState() -> View.onRestoreInstanceState()
+
+
+如果要实现自定义View的onSaveInstanceState和onRestoreInstanceState，可以参考TextView的实现。
